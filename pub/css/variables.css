@@ -104,6 +104,35 @@ td.desc {
   max-width: 250px;
   word-wrap: break-word; }
 
+#editBtn,
+#deleteBtn {
+  background-color: #DDA239;
+  padding: 0 1%;
+  line-height: 1em;
+  border-radius: 10%; }
+
+td #editBtn,
+td #deleteBtn {
+  color: #000 !important;
+  text-align: center;
+  padding: 2px 4px; }
+
+td #editBtn:hover,
+td #deleteBtn:hover {
+  color: #DDA239 !important;
+  cursor: pointer; }
+
+td #editBtn {
+  padding: 2px 11px; }
+
+td #deleteBtn {
+  padding: 2px 4px; }
+
+#editBtn:hover,
+#deleteBtn:hover {
+  background-color: #3c3c3c;
+  color: #DDA239 !important; }
+
 #header {
   display: flex;
   flex-direction: row;

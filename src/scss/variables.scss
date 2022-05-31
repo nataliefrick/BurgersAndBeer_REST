@@ -141,7 +141,43 @@ td.desc {
 }
 
 #editBtn,
-#deleteBtn {}
+#deleteBtn {
+    background-color: $yellow;
+    padding: 0 1%;
+    line-height: 1em;
+    border-radius: 10%;
+}
+
+td #editBtn,
+td #deleteBtn {
+    color: $black!important;
+    text-align: center;
+    padding: 2px 4px;
+}
+
+td #editBtn:hover,
+td #deleteBtn:hover {
+    color: $yellow!important;
+    cursor: pointer;
+}
+
+td #editBtn {
+    padding: 2px 11px;
+}
+
+td #deleteBtn {
+    padding: 2px 4px;
+}
+
+#editBtn:hover,
+#deleteBtn:hover {
+    background-color: $grey;
+    color: $yellow!important;
+}
+
+
+
+
 
 
 #header {

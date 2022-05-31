@@ -1,0 +1,159 @@
+// let nameInput = document.getElementById("name");
+// let codeInput = document.getElementById("code");
+// let progressInput = document.getElementById("progression");
+// let syllabusInput = document.getElementById("syllabus");
+// const submitBtn = document.getElementById("submit");
+// const modal = document.querySelector(".modal");
+// const closeBtn = document.querySelector(".close-button");
+// const modalEl = document.getElementById("modal");
+
+// submitBtn.addEventListener("click", addCourse);
+// closeBtn.addEventListener("click", hideModal);
+
+
+
+
+// Add a course
+function addCourse(event) {
+    event.preventDefault(); // prevents default to reload page
+    let name = nameInput.value;
+    let code = codeInput.value;
+    let prog = progressInput.value;
+    let link = syllabusInput.value;
+
+    let jsonStr = JSON.stringify({
+        code : code,
+        name : name,
+        progression : prog,
+        syllabus : link
+    });
+
+    fetch(url, {
+        method: "POST",
+        headers: {
+            "content-type": "application/json"
+        },
+        body: jsonStr
+    })
+    .then(response => response.json())
+    .then(data => clearForm())
+    .catch(err => console.log(err))
+}
+
+// clear the form
+function clearForm() {
+    nameInput.value = "";
+    codeInput.value = "";
+    progressInput.value = "";
+    syllabusInput.value = "";
+
+    getCourses();
+}
+
+// Delete a course
+function deleteCourse(id) {
+
+    fetch(url + "?id=" + id, {
+        method: "DELETE"
+    })
+    .then(response => response.json())
+    .then(data => getCourses())
+    .catch(err => console.log(err))
+}
+
+// Save changes to a course
+function saveChanges() {
+    const idModal = document.getElementById("id");
+    const codeModal = document.getElementById("code");
+    const nameModal = document.getElementById("name");
+    const progModal = document.getElementById("progression");
+    const syllabusModal = document.getElementById("syllabus");
+    let id = idModal.value;
+    let name = nameModal.value;
+    let code = codeModal.value;
+    let prog = progModal.value;
+    let link = syllabusModal.value;
+
+    let jsonStr = JSON.stringify({
+        id : id,
+        code : code,
+        name : name,
+        progression : prog,
+        syllabus : link
+    });
+
+    fetch(url, {
+        method: "PUT",
+        headers: {
+            "content-type": "application/json"
+        },
+        body: jsonStr
+    })
+    .then(response => response.json())
+    .then(data => getCourses())
+    .catch(err => console.log(err))
+
+
+}
+
+// hides modal on click of close btn
+function hideModal(){
+    modal.classList.toggle("show-modal");
+}
+
+// toggles popup with form to edit course
+function showModal(id) {
+    fetch(url + "?id=" + id, {
+        method: "GET"
+    })
+    .then(response => response.json())
+    .then(data => sendToForm(data)) // send data to form in modal
+    .catch(err => console.log(err))
+}
+
+// prepares form with content
+function sendToForm(data) {
+    modalEl.innerHTML = `<div>
+    <label for="id">ID (uneditable):</label><br>
+    <input type="text" name="code" id="id" value="${data.id}" readonly><br>
+    </div><div>
+    <label for="code">Course Code:</label><br>
+    <input type="text" name="code" id="code" value="${data.code}"><br>
+    </div><div>
+    <label for="name">Name:</label><br>
+    <input type="text" name="name" id="name" value="${data.name}"><br>
+    </div><div>
+    <label for="progression">Progression:</label><br>
+    <input type="text" name="progression" id="progression" value="${data.progression}"><br>
+    </div><div>
+    <label for="syllabus">Syllabus Link:</label><br>
+    <input type="text" name="syllabus" id="syllabus" value="${data.syllabus}"><br>
+    </div>
+    <input class="btn" type="submit" id="saveBtn" value="Save Changes"></input>`;
+
+    modal.classList.toggle("show-modal");
+
+    const saveBtn = document.querySelector("#saveBtn");
+    saveBtn.addEventListener("click", saveChanges);
+}
+
+
+// -----
+
+// let trEl = document.getElementsByClassName("course");
+// for(let i = 0; i<trEl.length; i++) {
+//     trEl[i].addEventListener("click", deleteCourse);
+// }
+
+
+// Delete a course
+// function deleteCourse(event) {
+    // let id = event.target.id;
+    // console.log(id);
+    // fetch(url + "?id=" + id, {
+    //     "method": "DELETE"
+    // })
+    // .then(response => response.json())
+    // .then(data => console.log(data))
+    // .catch(err => console.log(err))
+

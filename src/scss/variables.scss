@@ -1,0 +1,721 @@
+// define colour palett
+
+$white: #fff;
+$white-50: #ffffff50;
+$yellow: #DDA239;
+$yellow-50: #DDA23950;
+$yellow-transp: #DDA23980;
+$black: #000;
+$grey: #3c3c3c;
+
+// define font family
+$body-font: 'Fira Sans', sans-serif;
+
+html, body {
+    background-color: $black;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    // max-width: 1200px;
+    margin: 0 auto;
+}
+
+.dont-show {display:none;}
+.centered {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* -----------------General Typography----------------- */
+.text1, .text2, .text3, select, option, .author, .date, textarea,
+label,
+input,
+h1, h2, h3, h4,
+a, ul, li, p, td {
+    font-family: $body-font;
+    color: $yellow;
+}
+
+a {
+    text-decoration: none;
+}
+
+a.underlined {
+    text-decoration: underline;
+}
+
+a.underlined:hover {
+    background-color: $yellow;
+}
+
+a.u-link {
+    text-decoration: underline;
+}
+
+h1, h2, h3 {
+    text-align: center;
+}
+
+#main {
+    padding-top: 3%;
+}
+
+#main h2,
+#main p {
+    margin:0;
+}
+
+div#instructions {
+    background-color: $grey;
+    padding: 1% 2%;
+    margin: 3% auto;
+    width: 600px;
+
+}
+
+div#instructions p {
+    color: $white-50;
+    font-size: 0.8em;
+    margin: 0;
+    font-style: italic;
+    text-align: left!important;
+}
+
+div#instructions p span.bold {
+    font-weight: bold;
+}
+
+
+
+table {
+    border: $white-50;
+    overflow-x: auto;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 60px;
+}
+
+th {
+    font-family: $body-font;
+    font-weight: bold;
+    font-size: 0.8em;
+    line-height: 1.5em;
+    text-transform: uppercase;
+    color: $yellow;
+    text-align: left;
+    padding-left: 0.2em;
+    background-color: $yellow-transp;
+    border: 2px solid transparent;
+    min-width: 60px;
+}
+
+td {
+    font-size: 0.8em;
+    padding: 1em 1em 1em 1.5em;
+    color: $yellow-transp;
+}
+
+tr:nth-child(even) {
+    background-color: $yellow-50;
+}
+
+tr:nth-child(odd) {
+    background-color: $white-50;
+}
+
+td[scope="row"],
+th[scope="row"] {
+    background-color: $black!important;
+}
+
+th.centered,
+td.centered {
+    text-align: center;
+}
+
+th.desc,
+td.desc {
+    max-width: 250px;
+    word-wrap: break-word;
+}
+
+#editBtn,
+#deleteBtn {}
+
+
+#header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    max-height: 100px;
+    margin: 1% 3%;
+}
+
+.logo img {
+    height: 100px;
+    object-fit: contain;
+}
+
+div.nav-bar {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 3%;
+}
+
+.boka-bord-btn {
+    background-color: $yellow;
+    padding: 0 1%;
+    line-height: 1em;
+    border-radius: 10%;
+    width: 140px;
+}
+
+.boka-bord-btn h2 {
+    color: $black!important;
+    text-align: center;
+    font-size: 1.2em;
+}
+
+.boka-bord-btn:hover {
+    background-color: $grey;
+    color: $yellow!important;
+}
+
+.boka-bord-btn h2:hover {
+    color: $yellow!important;
+}
+
+/* The Overlay (background) */
+.overlay {
+    /* Height & width depends on how you want to reveal the overlay (see JS below) */
+    height: 100%;
+    width: 0;
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    right: 0;
+    top: 0;
+    background-color: #C4C4C4; 
+    border-left: 1px solid #C4C4C4; 
+    overflow-x: hidden; /* Disable horizontal scroll */
+    transition: 0.5s; /* 0.5 second transition effect to slide in or slide down the overlay (height or width, depending on reveal) */
+}
+
+/* Position the content inside the overlay */
+.overlay-content {
+    position: relative;
+    top: 5%; /* 25% from the top */
+    width: 100%; /* 100% width */
+    text-align: left; /* Centered text/links */
+    margin-top: 30px; /* 30px top margin to avoid conflict with the close button on smaller screens */
+}
+
+/* The navigation links inside the overlay */
+.overlay a {
+    font-size: 1.4em;
+    line-height: 1.5em;
+    padding: 8px 1em;
+    text-decoration: none;
+    color:$black!important;
+    display: block; /* Display block instead of inline */
+    transition: 0.3s; /* Transition effects on hover (color) */
+}
+
+/* When you mouse over the navigation links, change their color */
+.icon:hover, .overlay a:hover, .overlay a:focus {
+    background-color: $yellow;
+    color:$grey!important;
+}
+
+.icon {
+    color: $yellow;
+    // border-radius: 50%;
+    padding: 0.4em 0.7em;
+    display: flex;
+    justify-content: center;
+    font-size: 20pt;
+}
+
+
+
+.closebtn {
+    font-size: 1.5em;
+    // border-radius: 50%;
+}
+
+/* Position the buttons (top right corner) */
+.overlay .closebtn {
+    position: absolute;
+    /* top: 20px;
+    right: 75px; */
+    font-size: 2em!important;
+}
+
+// SECTION hero -------------------------------------------
+
+section#hero {
+    width: 100%;
+    height: auto;
+    max-height: 450px;
+}
+
+section#hero img {
+    object-fit: cover;
+    width: 100%;
+    height: auto;
+    max-height: 450px;
+}
+
+// SECTION choices --------------------------
+
+section#choices {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 3%;
+    background: url('../img/background.jpg') no-repeat center fixed;     
+    background-size: cover;
+    background-color: $grey;
+    width: 100%;
+    height: 250px;
+}
+
+div.card {
+    background-color: $white;
+    width: 250px;
+    border: 1px solid $yellow;
+}
+
+div.card:hover {
+    background-color: $yellow;
+}
+
+div.card img {
+    width: 250px;
+    height: 125px;
+    object-fit: cover;
+}
+
+div.card a h3 {
+    color: black;
+    text-align: center;
+}         
+
+
+// section insta -----------------------
+section#insta {
+    background-color: $yellow-transp;
+    padding: 3% 0;
+}
+
+section#insta h2 {
+    text-align: center;
+    margin-top: 0;
+}
+
+
+div#insta-img {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 1%;
+    margin: 3% auto;
+}
+
+div#insta-img img {
+    width: 240px;
+    height: 180px;
+    object-fit: cover;
+    border: 1px solid $yellow;
+}
+
+// anmäla nyheterna -----------------------------
+section#newsletter {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 3%;
+    background: url('../img/background.jpg') no-repeat center fixed;     
+    background-size: cover;
+    background-color: $grey;
+    width: 100%;
+    height: 250px;
+}
+
+section#newsletter div.flex-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background-color: $grey;
+    padding: 2%;
+    gap: 3%;
+}
+
+// div.col-left {}
+div.col-left h3, div.col-left p { 
+    text-align: left; 
+    margin: 0;
+    word-wrap: break-word;
+}
+
+div.col-left p { 
+    font-size: 0.8em;
+}
+
+div.col-right {
+    min-width: 200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+div.col-right form {
+    padding: 1%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 200px;
+}
+        
+div.col-right form input {
+    background-color: $yellow-transp;
+    color: $white;
+    text-align: left;
+    padding: 2% 0 2% 5px;
+    border: 0;
+    margin: 1% auto;   
+    width: 195px; 
+}
+
+div.col-right form input.submit {
+    background-color: $yellow;
+    color: $black;
+    text-align: center;
+    border: 1px solid transparent;
+    width: 200px;
+}
+
+form input.submit:hover {
+    background-color: $grey!important;
+    border: 1px solid $yellow!important;
+    color: $yellow!important;
+}
+
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: white;
+    opacity: 1; /* Firefox */
+  }
+  
+  :-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color: white;
+  }
+  
+  ::-ms-input-placeholder { /* Microsoft Edge */
+    color: white;
+  }
+  
+
+
+// footer --------------------------------
+footer {
+    border-top: 3px solid $yellow;
+}
+
+section#footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 5%;
+    padding-top: 3%;
+    align-items: flex-start;
+}
+
+div.col1,
+div.col2,
+div.col3 {
+    min-width: 300px;
+    text-align: center;
+} 
+
+div.col1 h2, 
+div.col1 h3, 
+div.col3 h2, 
+div.col3 h3 { 
+    text-transform: uppercase; 
+    margin-bottom: 0; 
+}
+
+div.col1 h3, 
+div.col3 h3 {
+    font-size: 0.9em;
+}
+
+div.col1 p, 
+div.col3 p { 
+    margin: 0; 
+    font-size: 0.8em;
+}
+
+div.col3 div.boka-bord-btn h2 {
+    padding: 10%;
+    font-size: 1em;
+}
+
+div.col3 div.boka-bord-btn {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+div.col2 img {
+    width: 300px;
+    height: 200px;
+    line-height: 300px;
+    object-fit: cover; 
+    margin-top: 10%;
+}
+
+section#copyright {
+    background-color: $yellow;
+}
+ 
+section#copyright h4 {
+    text-align: center;
+    color: $black;
+    padding: 1% 0;
+}
+
+
+
+
+// Inner pages -------------------------------------
+
+section#menu-options div.flex-container,
+section#title {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 3%;
+}
+
+section#menu-options,
+section#title {
+    background: url('../img/background.jpg') no-repeat center fixed;     
+    background-size: cover;
+    background-color: $grey;
+    width: 100%;
+    min-height: 150px;
+}
+
+section#menu-options {
+    padding: 3% 0;
+}
+
+section#burgers h2,
+section#beer h2,
+section#menu-options h2,
+section#title h2 {
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 1.8em;
+    background-color: $grey;
+    padding: 1%;
+}
+
+section#burgers p,
+section#beer p,
+section#menu-options p,
+section#main p {
+    text-align: center;
+}
+
+section#options,
+section#beer-options,
+section#burger-options {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 3%;
+    justify-content: center;
+    max-width: 900px;
+    margin: 3% auto;
+}
+
+section#options div.card,
+section#beer-options div.card,
+section#burger-options div.card {
+    margin-bottom: 3%;
+    background-color: $yellow;
+
+}
+
+section#options div.card:hover,
+section#beer-options div.card:hover,
+section#burger-options div.card:hover {
+    background-color: $yellow;
+}
+
+section#options div.card img,
+section#beer-options div.card img,
+section#burger-options div.card img {
+    width: 250px;
+    height: 185px;
+    object-fit: cover;
+}
+
+section#options div.card h4,
+section#options div.card h3,
+section#beer-options div.card h3,
+section#burger-options div.card h3 {
+    text-align: center;
+    text-transform: uppercase;
+    color: $white;
+}
+
+section#options div.card p,
+section#beer-options div.card p,
+section#burger-options div.card p {
+    text-align: center;
+    padding: 0 6%;
+    color: $white;
+}
+     
+
+
+section#menu-options div.container {
+    width: 50%;
+    max-width: 600px;
+    background-color: $grey;
+    padding: 2%;
+    margin: 0 auto;
+}
+
+section#menu-options div.container h2 {
+    margin: 0;
+}
+
+div.col {
+    min-width: 150px;
+    padding: 1%;
+    margin: 1%;
+}
+
+div.col p,
+div.col h3 {
+    text-align: center;
+}
+
+// booking form ---------------------------------------------------------
+section#booking-form  {
+    background: url('../img/background.jpg') no-repeat center fixed;     
+    background-size: cover;
+    background-color: $grey;
+    width: 250px;
+    padding: 2%;
+    margin: 3% auto;
+    min-height: 150px;
+}
+
+form {
+    background-color: $grey;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    max-width: 225px; 
+    margin: auto;
+    padding: 3%;
+}
+
+form h3 {
+    text-transform: uppercase;
+    text-align: center;
+}
+
+section#booking-form form input {
+    background-color: $yellow-transp;
+    color: $white;
+    text-align: left;
+    padding: 2% 0 2% 5px;
+    border: 0;
+    margin: 1% auto;   
+    width: 195px; 
+}
+
+section#booking-form form input.submit {
+    background-color: $yellow;
+    color: $black;
+    text-align: center;
+    border: 1px solid transparent;
+    width: 200px;
+}
+
+form input.submit:hover {
+    background-color: $grey!important;
+    border: 1px solid $yellow!important;
+    color: $yellow!important;
+}
+
+fieldset {
+    flex-direction: row;
+    gap: 0;
+    width: 200px;
+    border: 0;
+    margin: 1% auto 0 auto;
+    padding: 0!important;
+    
+}
+
+fieldset label {
+    font-size: 0.8em;
+    color: $yellow!important;
+    background-color: $yellow-transp;
+    padding: 5px 5px;
+    margin: 0;
+    flex-grow: 1;
+}
+
+fieldset select {
+    font-size: 0.8em;
+    color: $white;
+    background-color: $yellow-transp;
+    border: 0;
+    padding: 4px;
+    margin: 0;
+    // width: 43%;
+    flex-grow: 1;
+}
+
+select#nr-pers {
+    width: 96px!important;
+}
+
+input#date {
+    width: 139px!important;
+}
+
+label.time {
+    padding-right: 59px!important; 
+}
+
+input#time {
+    padding: 2px 0 3px 15px!important;
+    width: 149px!important;
+    margin: 0!important;
+}
+
+p.small {
+    color: $yellow;
+    font-size: 0.7em;
+    font-style: italic;
+}
+
+
+// select option

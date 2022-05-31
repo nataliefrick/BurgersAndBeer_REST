@@ -29,7 +29,7 @@ function getMenu() {
             return
         }
         return response.json()
-        // .then(data => console.log(data))
+        //.then(data => console.log(data))
         .then(data => writeMenus(data))
         .catch(err => console.log(err))
     })
@@ -47,12 +47,12 @@ function writeMenus(menu) {
             if (burger.category == "burger") {
             burgersEl.innerHTML +=
             `<tr class="item"><td class="centered">${burger.id}</td>
-            <td class="centered">${burger.itemName}</td>
-            <td class="desc">${burger.itemDesc}</td>
+            <td class="centered" contenteditable >${burger.itemName}</td>
+            <td class="desc" contenteditable >${burger.itemDesc}</td>
             <td class="centered">${burger.img}</td>
-            <td class="centered">${burger.dagensLunch}</td>
-            <td scope="row" class="centered"><span id="editBtn" onClick="showModal('${burger.id}')">Edit</span></td>
-            <td scope="row" class="centered"><span id="deleteBtn" onClick="deleteCourse('${burger.id}')">Delete</span></td>
+            <td class="centered" contenteditable >${burger.dagensLunch}</td>
+            <td scope="row" class="centered"><span id="editBtn" onClick="showModal('${burger.id}')">Redigera</span></td>
+            <td scope="row" class="centered"><span id="deleteBtn" onClick="deleteItem('${burger.id}')">Radera</span></td>
             </tr>`
             }
         });
@@ -71,7 +71,7 @@ function writeMenus(menu) {
             <td class="desc">${beer.itemDesc}</td>
             <td class="centered">${beer.img}</td>
             <td scope="row" class="centered"><span id="editBtn" onClick="showModal('${beer.id}')">Edit</span></td>
-            <td scope="row" class="centered"><span id="deleteBtn" onClick="deleteCourse('${beer.id}')">Delete</span></td>
+            <td scope="row" class="centered"><span id="deleteBtn" onClick="deleteItem('${beer.id}')">Delete</span></td>
             </tr>`
             }
         });
@@ -84,16 +84,69 @@ function writeMenus(menu) {
         menu.forEach(options =>  {
             if (options.category == "sides" || options.category == "läsk" || options.category == "efterrätt" || options.category == "lättöl" ) {
             optionsEl.innerHTML +=
-            `<tr class="item"><td class="centered">${options.id}</td>
-            <td class="centered">${options.itemName}</td>
-            <td class="centered">${options.category}</td>
-            <td scope="row" class="centered"><span id="editBtn" onClick="showModal('${options.id}')">Edit</span></td>
-            <td scope="row" class="centered"><span id="deleteBtn" onClick="deleteCourse('${options.id}')">Delete</span></td>
+            `<tr id="id-${options.id}" class="item">
+            <td class="centered">${options.id}</td>
+            <td class="centered" id="name-${options.id}" contenteditable>${options.itemName}</td>
+            <td class="centered" id="category-${options.id}" contenteditable>${options.category}</td>
+            <td scope="row" class="centered"><span id="editBtn" onClick="updateItem('${options.id}')">Edit</span></td>
+            <td scope="row" class="centered"><span id="deleteBtn" onClick="deleteItem('${options.id}')">Delete</span></td>
             </tr>`
             }
         });
+
+        // let deleteEL = document.getElementsByClassName("deleteBtn");
+        // let editEL = document.getElementsByClassName("editBtn");
+
+        // for(let i=0; i<deleteEL.length; i++) {
+        //     deleteEl[i].addEventListener("click", deleteItem);
+        //     editEl[i].addEventListener("click", updateItem);
+        // }
     }
 }
+
+// Delete an item
+function deleteItem(id) {
+    // let id = event.target.dataset.id;
+    // console.log("delete item" + id);
+    fetch(url + "?id=" + id, {
+        method: "DELETE"
+    })
+    .then(response => response.json())
+    .then(data => getMenu())
+    .catch(err => console.log(err))
+}
+
+function updateItem(id) {
+    // let id = event.target.dataset.id;
+    let itemName = document.getElementById("name-" + id).innerHTML;
+    let category = document.getElementById("category-" + id).innerHTML;
+
+    let jsonStr = JSON.stringify({
+        id : id,
+        itemName : itemName,
+        // itemDesc : itemDesc,
+        // img : img,
+        // dagensLunch : dagensLunch,
+        category : category
+    });
+
+    fetch(url, {
+        method: "PUT",
+        headers: {
+            "content-type": "application/json"
+        },
+        body: jsonStr
+    })
+    .then(response => response.json())
+    .then(data => getMenu())
+    .catch(err => console.log(err))
+}
+
+
+
+
+
+
 
 /* Hamburger Menu -----------------------*/
 /* Open when someone clicks on the span element */

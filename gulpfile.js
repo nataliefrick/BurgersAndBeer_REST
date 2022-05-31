@@ -62,7 +62,7 @@ function sassTask() {
 function jsTask() {
     return src(files.jsPath, { sourcemaps: true} )
     .pipe(concat('main.js'))
-    .pipe(terser()) // minifying 
+    // .pipe(terser()) // minifying 
     .pipe(dest('pub/js'))
     .pipe(browserSync.stream())
     ;

@@ -152,7 +152,6 @@ td #editBtn,
 td #deleteBtn {
     color: $black!important;
     text-align: center;
-    padding: 2px 4px;
 }
 
 td #editBtn:hover,
@@ -166,7 +165,7 @@ td #editBtn {
 }
 
 td #deleteBtn {
-    padding: 2px 4px;
+    padding: 2px 17px;
 }
 
 #editBtn:hover,
@@ -174,6 +173,81 @@ td #deleteBtn {
     background-color: $grey;
     color: $yellow!important;
 }
+
+
+/* The Modal (background) */
+
+.modal {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    visibility: hidden;
+    transform: scale(1.1);
+}
+
+.modal-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 1rem 1.5rem;
+    width: 12rem;
+    border-radius: 0.5rem;
+}
+
+.close-button {
+    float: right;
+    width: 1.5rem;
+    line-height: 1.5rem;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 0.25rem;
+    background-color: lightgray;
+}
+
+.close-button:hover {
+    background-color: darkgray;
+}
+
+.show-modal {
+    opacity: 1;
+    visibility: visible;
+    transform: scale(1.0);
+    transition: visibility 0s linear 0s, opacity 0.25s 0s, transform 0.25s;
+}
+
+form#modal {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+}
+
+form#modal label {
+    font-size: 0.8em;
+    padding-top: 2%;
+}
+
+form#modal input,
+form#modal div {
+    margin: 0 auto;
+}
+
+form#modal input.btn {
+    margin-top: 20px;
+}
+
+
+
+
 
 
 

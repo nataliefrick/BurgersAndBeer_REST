@@ -1,1 +1,160 @@
-"use strict";let url="http://localhost/173%20project/webservice/site-api.php";function init(){getMenu()}function getMenu(){fetch(url).then((e=>{if(200==e.status)return e.json().then((e=>writeMenus(e))).catch((e=>console.log(e)))}))}function writeMenus(e){const t=document.getElementById("burger-list");null!==t&&(t.innerHTML="",e.forEach((e=>{"burger"==e.category&&(t.innerHTML+=`<tr class="item"><td class="centered">${e.id}</td>\n            <td class="centered">${e.itemName}</td>\n            <td class="desc">${e.itemDesc}</td>\n            <td class="centered">${e.img}</td>\n            <td class="centered">${e.dagensLunch}</td>\n            <td scope="row" class="centered"><span id="editBtn" onClick="showModal('${e.id}')">Edit</span></td>\n            <td scope="row" class="centered"><span id="deleteBtn" onClick="deleteCourse('${e.id}')">Delete</span></td>\n            </tr>`)})));const n=document.getElementById("beer-list");null!==n&&(n.innerHTML="",e.forEach((e=>{"beer"==e.category&&(n.innerHTML+=`<tr class="item"><td class="centered">${e.id}</td>\n            <td class="centered">${e.itemName}</td>\n            <td class="desc">${e.itemDesc}</td>\n            <td class="centered">${e.img}</td>\n            <td scope="row" class="centered"><span id="editBtn" onClick="showModal('${e.id}')">Edit</span></td>\n            <td scope="row" class="centered"><span id="deleteBtn" onClick="deleteCourse('${e.id}')">Delete</span></td>\n            </tr>`)})));const d=document.getElementById("options-list");null!==d&&(d.innerHTML="",e.forEach((e=>{"sides"!=e.category&&"läsk"!=e.category&&"efterrätt"!=e.category&&"lättöl"!=e.category||(d.innerHTML+=`<tr class="item"><td class="centered">${e.id}</td>\n            <td class="centered">${e.itemName}</td>\n            <td class="centered">${e.category}</td>\n            <td scope="row" class="centered"><span id="editBtn" onClick="showModal('${e.id}')">Edit</span></td>\n            <td scope="row" class="centered"><span id="deleteBtn" onClick="deleteCourse('${e.id}')">Delete</span></td>\n            </tr>`)})))}function openNav(){document.getElementById("myNav").style.width="50%"}function closeNav(){document.getElementById("myNav").style.width="0%"}window.onload=init,document.getElementById("main").addEventListener("load",init);
+"use strict";
+
+let url = "http://localhost/173%20project/webservice/site-api.php";
+//let url = "https://nataliesalomons.com/miun/dt173g/project/site-api.php";
+
+
+// category: "lättöl"
+// created: "2022-05-30 16:56:20"
+// dagensLunch: ""
+// id: "25"
+// img: ""
+// itemDesc: ""
+// itemName: "Carlsberg"
+
+window.onload = init;
+document.getElementById("main").addEventListener("load", init);
+
+function init() {
+    // fetch data from database
+    getMenu();
+}
+
+
+// MENU ---------------------------
+function getMenu() {
+    fetch(url)
+    .then(response => {
+        if(response.status != 200) {
+            return
+        }
+        return response.json()
+        //.then(data => console.log(data))
+        .then(data => writeMenus(data))
+        .catch(err => console.log(err))
+    })
+}
+
+
+// write burgers to webpage
+function writeMenus(menu) {
+
+    // write out burger options
+    const burgersEl = document.getElementById("burger-list");
+    if (burgersEl !== null) {
+        burgersEl.innerHTML = "";
+        menu.forEach(burger =>  {
+            if (burger.category == "burger") {
+            burgersEl.innerHTML +=
+            `<tr class="item"><td class="centered">${burger.id}</td>
+            <td class="centered" contenteditable >${burger.itemName}</td>
+            <td class="desc" contenteditable >${burger.itemDesc}</td>
+            <td class="centered">${burger.img}</td>
+            <td class="centered" contenteditable >${burger.dagensLunch}</td>
+            <td scope="row" class="centered"><span id="editBtn" onClick="showModal('${burger.id}')">Redigera</span></td>
+            <td scope="row" class="centered"><span id="deleteBtn" onClick="deleteItem('${burger.id}')">Radera</span></td>
+            </tr>`
+            }
+        });
+      }
+
+
+    // write out beer options
+    const beerEl = document.getElementById("beer-list");
+    if (beerEl !== null) {
+        beerEl.innerHTML = "";
+        menu.forEach(beer =>  {
+            if (beer.category == "beer") {
+            beerEl.innerHTML +=
+            `<tr class="item"><td class="centered">${beer.id}</td>
+            <td class="centered">${beer.itemName}</td>
+            <td class="desc">${beer.itemDesc}</td>
+            <td class="centered">${beer.img}</td>
+            <td scope="row" class="centered"><span id="editBtn" onClick="showModal('${beer.id}')">Edit</span></td>
+            <td scope="row" class="centered"><span id="deleteBtn" onClick="deleteItem('${beer.id}')">Delete</span></td>
+            </tr>`
+            }
+        });
+    }
+
+    // write out sides options
+    const optionsEl = document.getElementById("options-list");
+    if (optionsEl !== null) {
+        optionsEl.innerHTML = "";
+        menu.forEach(options =>  {
+            if (options.category == "sides" || options.category == "läsk" || options.category == "efterrätt" || options.category == "lättöl" ) {
+            optionsEl.innerHTML +=
+            `<tr id="id-${options.id}" class="item">
+            <td class="centered">${options.id}</td>
+            <td class="centered" id="name-${options.id}" contenteditable>${options.itemName}</td>
+            <td class="centered" id="category-${options.id}" contenteditable>${options.category}</td>
+            <td scope="row" class="centered"><span id="editBtn" onClick="updateItem('${options.id}')">Edit</span></td>
+            <td scope="row" class="centered"><span id="deleteBtn" onClick="deleteItem('${options.id}')">Delete</span></td>
+            </tr>`
+            }
+        });
+
+        // let deleteEL = document.getElementsByClassName("deleteBtn");
+        // let editEL = document.getElementsByClassName("editBtn");
+
+        // for(let i=0; i<deleteEL.length; i++) {
+        //     deleteEl[i].addEventListener("click", deleteItem);
+        //     editEl[i].addEventListener("click", updateItem);
+        // }
+    }
+}
+
+// Delete an item
+function deleteItem(id) {
+    // let id = event.target.dataset.id;
+    // console.log("delete item" + id);
+    fetch(url + "?id=" + id, {
+        method: "DELETE"
+    })
+    .then(response => response.json())
+    .then(data => getMenu())
+    .catch(err => console.log(err))
+}
+
+function updateItem(id) {
+    // let id = event.target.dataset.id;
+    let itemName = document.getElementById("name-" + id).innerHTML;
+    let category = document.getElementById("category-" + id).innerHTML;
+
+    let jsonStr = JSON.stringify({
+        id : id,
+        itemName : itemName,
+        // itemDesc : itemDesc,
+        // img : img,
+        // dagensLunch : dagensLunch,
+        category : category
+    });
+
+    fetch(url, {
+        method: "PUT",
+        headers: {
+            "content-type": "application/json"
+        },
+        body: jsonStr
+    })
+    .then(response => response.json())
+    .then(data => getMenu())
+    .catch(err => console.log(err))
+}
+
+
+
+
+
+
+
+/* Hamburger Menu -----------------------*/
+/* Open when someone clicks on the span element */
+function openNav() {
+    document.getElementById("myNav").style.width = "50%";
+}
+
+/* Close when someone clicks on the "x" symbol inside the overlay */
+function closeNav() {
+    document.getElementById("myNav").style.width = "0%";
+}

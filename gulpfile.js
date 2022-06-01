@@ -20,6 +20,7 @@ const imagewebp = require('gulp-webp');
 // search for files
 const files = {
     htmlPath:"src/**/*.html",
+    phpPath:"src/**/*.php",
     jsPath:"src/**/*.js",
     imgPath:"src/img/*.*",
     sassPath:"src/scss/*.scss"
@@ -28,6 +29,14 @@ const files = {
 // HTML task: copy files
 function copyHTML() {
     return src(files.htmlPath) // fetch files and returns msg when complete
+    .pipe(dest('pub')) //copy into pub directory
+    .pipe(browserSync.stream())
+    ;
+}
+
+// PHP task: copy files
+function copyPHP() {
+    return src(files.phpPath) // fetch files and returns msg when complete
     .pipe(dest('pub')) //copy into pub directory
     .pipe(browserSync.stream())
     ;
@@ -118,8 +127,8 @@ function watchTask(){
         }
     );
 
-    watch([files.htmlPath, files.jsPath, files.sassPath, files.imgPath], 
-        parallel(copyHTML, copyImg, jsTask, sassTask, optimizeimg, )).on('change', browserSync.reload); //compilescss  
+    watch([files.htmlPath, files.phpPath, files.jsPath, files.sassPath, files.imgPath], 
+        parallel(copyHTML, copyPHP, copyImg, jsTask, sassTask, optimizeimg, )).on('change', browserSync.reload); //compilescss  
 }
 
 

@@ -188,6 +188,39 @@ form#modal div {
 form#modal input.btn {
   margin-top: 20px; }
 
+section#upload-file {
+  background-color: #3c3c3c;
+  color: #fff;
+  width: 60%;
+  padding: 1%;
+  margin: 3% auto;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  gap: 1%; }
+
+section#upload-file h3 {
+  margin: 0; }
+
+section#upload-file form {
+  background-color: #3c3c3c;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  max-width: 350px;
+  margin: auto;
+  padding: 3%; }
+
+section#upload-file form label {
+  margin-right: 4px; }
+
+section#upload-file form input {
+  border: 1px solid #DDA23950; }
+
+span.errormsg {
+  color: #DDA239;
+  text-align: center; }
+
 #header {
   display: flex;
   flex-direction: row;

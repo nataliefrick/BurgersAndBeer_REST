@@ -26,10 +26,6 @@
 
             <h3>SÖNDAG</h3>
             <p>12:00-22:00</p>
-            <div class="boka-bord-btn"><a href="book.html">
-                <h2>Boka bord</h2>
-            </a></div>
-
         </div>
     </section>
     <section id="copyright">

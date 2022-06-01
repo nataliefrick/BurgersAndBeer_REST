@@ -123,17 +123,14 @@ submitBtn.addEventListener("click", addItem);
 // Add a menu item
 function addItem(event) {
     event.preventDefault(); // prevents default to reload page
-    console.log("addItem22");
-    let name = document.getElementById('nameInput').innerHTML.value;
-    let desc = document.getElementById('descInput').value;
-    let category = document.getElementById('categoryInput').value;
-    let img = document.getElementById('imgInput').value;
-    let dagens = "";
+    let name = nameInput.value;
+    let desc = descInput.value;
+    let category = categoryInput.value;
+    let img = imgInput.value;
 
     let jsonStr = JSON.stringify({
         itemName : name,
         itemDesc : desc,
-        dagensLunch : dagens,
         category : category,
         img : img
     });
@@ -148,7 +145,7 @@ function addItem(event) {
 
     .then(response => console.log(response))
     .then(response => response.json())
-    .then(data => console.log("additem"))
+    .then(data => clearForm())
     .catch(err => console.log(err))
 }
 
@@ -198,6 +195,8 @@ function showModal(id) {
 
 // prepares form with content
 function sendToForm(data) {
+ 
+
     modalEl.innerHTML = `<div>
     <label for="id">ID:</label><br>
     <input type="text" name="code" id="id" value="${data.id}" readonly><br>
@@ -213,9 +212,6 @@ function sendToForm(data) {
     </div><div>
     <label for="img">Bild Filnamn:</label><br>
     <input type="text" name="img" id="img" value="${data.img}"><br>
-    </div><div>
-    <label for="dagensLunch">Dagens Lunch:</label><br>
-    <input type="text" name="dagensLunch" id="dagensLunch" value="${data.dagensLunch}"><br>
     </div>
     <input class="btn" type="submit" id="saveBtn" value="Uppdatera"></input>`;
 
@@ -229,13 +225,11 @@ function sendToForm(data) {
 function saveChanges() {
     
     const idModal = document.getElementById("id");
-    // const nameModal = document.getElementById("name");// wrong name
-    const nameModal = document.getElementById("itemName");// wrong name
-    // const descModal = document.getElementById("desc");// wrong name
-    const descModal = document.getElementById("itemDesc");// wrong name
+    const nameModal = document.getElementById("name");// wrong name
+    const descModal = document.getElementById("desc");// wrong name
     const imgModal = document.getElementById("img");
     const categoryModal = document.getElementById("category");
-    const dagensModal = document.getElementById("dagensLunch"); // wrong name - add dagens to popup
+    const dagensModal = document.getElementById("dagens"); // wrong name - add dagens to popup
     let id = idModal.value;
     let name = nameModal.value;
     let desc = descModal.value;

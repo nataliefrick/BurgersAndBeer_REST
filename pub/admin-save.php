@@ -86,7 +86,7 @@ if ($handle = opendir('img/')) {
                         </select>
                         </td>
                         <td><input class="btn" type="submit" id="submit-addnew" value="Lägg till"></input></td>
-                        <!-- <td><input id="submit-addnew" type="submit"  onClick="addItem" value="Lägg till"></input></td> -->
+                        <!-- <td><input id="submit-addnew" onClick="addItem()">Lägg till</input></td> -->
                     </tr>
                 </tbody>
             </table>

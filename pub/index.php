@@ -1,11 +1,10 @@
 <?php
 include_once("incl/config.php");
-// check to see if user is logged in
-// $user = new User();
-// $user->restrictPage();
 
+//$url = "http://localhost/173%20project/webservice/login.php";
+$url = "https://nataliesalomons.com/miun/dt173g/project/webservice/login.php";
 
-$page_title = "Dashboard";
+$page_title = "Login";
 include("incl/header.php");
 
 // Check to see if user is logged in
@@ -26,8 +25,6 @@ if (isset($_POST['username'])) {
         // If both fields have data, check with the database with a cURL call
 
         //POST with cURL
-        $url = "http://localhost/173%20project/webservice/login.php";
-        //$url = "https://nataliesalomons.com/miun/dt173g/project/webservice/login.php";
         $curl = curl_init();
         // array
         $user = array("username" => $username, "password" => $password);

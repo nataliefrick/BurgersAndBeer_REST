@@ -1,7 +1,7 @@
 "use strict";
 
-const url = "http://localhost/173%20project/webservice/site-api.php";
-//const url = "https://nataliesalomons.com/miun/dt173g/project/webservice/site-api.php";
+//let url = "http://localhost/173%20project/webservice/site-api.php";
+let url = "https://nataliesalomons.com/miun/dt173g/project/webservice/site-api.php";
 
 
 // category: "lättöl"

@@ -28,7 +28,7 @@ if ($handle = opendir('img/')) {
     <p>Här ser du alla alternativ i menu.</p>
     <div id="instructions">
         <p><span class="bold">Uppdatera: </span>Webbplasten använder "content-edible" redigering. Gör ändringar direkt in i tabellen och sedan spara ändringar. </p>
-        <p><span class="bold">Lägga till: </span>Steg 1 är att ladda upp en bild. Steg två är att fylla i formulär. Steg 3: tryck på "lägg till" knappen.</p>
+        <p><span class="bold">Lägga till: </span>Steg 1 är att ladda upp en bild. Steg två är att fylla i formuläret. Steg 3: tryck på "lägg till" knappen.</p>
         <p><span class="bold">Ta-bort: </span>Klicka på ta-bort knappen. </p>
     </div>
 

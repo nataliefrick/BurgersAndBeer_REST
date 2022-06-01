@@ -1,9 +1,9 @@
 <?php
 include_once("incl/config.php");
 // check to see if user is logged in
-// $user = new User();
-// $user->restrictPage();
-
+if (!isset($_SESSION["admin"])) {
+    header("Location: index.php");
+}
 
 $page_title = "Dashboard";
 include("incl/header.php");

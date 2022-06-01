@@ -221,6 +221,9 @@ span.errormsg {
   color: #DDA239;
   text-align: center; }
 
+div.container {
+  margin: 3% auto; }
+
 #header {
   display: flex;
   flex-direction: row;

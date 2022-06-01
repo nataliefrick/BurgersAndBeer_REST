@@ -26,9 +26,17 @@ include_once("incl/config.php");
             <img src="img/logo-orange.webp" alt="logo of burgerandbeers">
         </div>
         <div class="nav-bar">
-            <a href="book.html" class="boka-bord-btn">
-                <h2>Boka bord</h2>
+            <?php
+            //Logout button
+            if (isset($_GET["logout"])) {
+                session_destroy();
+                header("Location: index.php");
+            }
+            ?>
+            <a href="admin.php?logout" class="boka-bord-btn">
+                <h2>Logga ut</h2>
             </a>
+        
             <nav id="hamburger-menu">
                 <!-- The overlay -->
                 <div id="myNav" class="overlay">
@@ -40,7 +48,6 @@ include_once("incl/config.php");
                     <div class="overlay-content">
                         <a href="index.html">Start</a>
                         <a href="admin.php">Admin Dashboard</a>
-                        <a href="upload-file.php">Upload Image</a>
                     </div>
                 </div>
         

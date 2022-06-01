@@ -1,7 +1,7 @@
 "use strict";
 
-let url = "http://localhost/173%20project/webservice/site-api.php";
-//let url = "https://nataliesalomons.com/miun/dt173g/project/webservice/site-api.php";
+const url = "http://localhost/173%20project/webservice/site-api.php";
+//const url = "https://nataliesalomons.com/miun/dt173g/project/webservice/site-api.php";
 
 
 // category: "lättöl"
@@ -16,7 +16,7 @@ window.onload = init;
 
 function init() {
     // fetch data from database
-    getMenu();
+    getMenu(); // includes user
 }
 
 
@@ -33,7 +33,6 @@ function getMenu() {
         .catch(err => console.log(err))
     })
 }
-
 
 // write burgers to webpage
 function writeMenus(menu) {
@@ -171,6 +170,8 @@ function showModal(id) {
 
 // prepares form with content
 function sendToForm(data) {
+ 
+
     modalEl.innerHTML = `<div>
     <label for="id">ID:</label><br>
     <input type="text" name="code" id="id" value="${data.id}" readonly><br>

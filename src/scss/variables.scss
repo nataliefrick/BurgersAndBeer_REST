@@ -124,11 +124,6 @@ tr:nth-child(odd) {
     background-color: $white-50;
 }
 
-td[scope="row"],
-th[scope="row"] {
-    background-color: $black!important;
-}
-
 th.centered,
 td.centered {
     text-align: center;
@@ -144,7 +139,7 @@ td.desc {
 #deleteBtn {
     background-color: $yellow;
     padding: 0 1%;
-    line-height: 1em;
+    line-height: 2em;
     border-radius: 10%;
 }
 
@@ -732,6 +727,13 @@ section#booking-form  {
     padding: 2%;
     margin: 3% auto;
     min-height: 150px;
+}
+form#addNew {
+    background-color: transparent;
+    display: block;
+    max-width: inherit; 
+    margin: 0;
+    padding: 0;
 }
 
 form {

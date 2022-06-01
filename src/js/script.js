@@ -1,7 +1,7 @@
 "use strict";
 
 let url = "http://localhost/173%20project/webservice/site-api.php";
-//let url = "https://nataliesalomons.com/miun/dt173g/project/site-api.php";
+//let url = "https://nataliesalomons.com/miun/dt173g/project/webservice/site-api.php";
 
 
 // category: "lättöl"
@@ -13,7 +13,6 @@ let url = "http://localhost/173%20project/webservice/site-api.php";
 // itemName: "Carlsberg"
 
 window.onload = init;
-document.getElementById("main").addEventListener("load", init);
 
 function init() {
     // fetch data from database
@@ -39,69 +38,68 @@ function getMenu() {
 // write burgers to webpage
 function writeMenus(menu) {
 
-    // write out burger options
-    const burgersEl = document.getElementById("burger-list");
-    if (burgersEl !== null) {
-        burgersEl.innerHTML = "";
-        menu.forEach(burger =>  {
-            if (burger.category == "burger") {
-            burgersEl.innerHTML +=
-            `<tr class="item"><td class="centered">${burger.id}</td>
-            <td class="centered" contenteditable >${burger.itemName}</td>
-            <td class="desc" contenteditable >${burger.itemDesc}</td>
-            <td class="centered">${burger.img}</td>
-            <td class="centered" contenteditable >${burger.dagensLunch}</td>
-            <td scope="row" class="centered"><span id="editBtn" onClick="showModal('${burger.id}')">Redigera</span></td>
-            <td scope="row" class="centered"><span id="deleteBtn" onClick="deleteItem('${burger.id}')">Radera</span></td>
-            </tr>`
-            }
+    // write out options
+    const menuAltEl = document.getElementById("menu-list");
+    if (menuAltEl !== null) {
+        menuAltEl.innerHTML = "";
+        menu.forEach(option =>  {
+             menuAltEl.innerHTML +=
+            `<tr class="item"><td class="centered">${option.id}</td>
+            <td class="centered" >${option.itemName}</td>
+            <td class="centered" >${option.category}</td>
+            <td class="desc" >${option.itemDesc}</td>
+            <td class="centered">${option.img}</td>
+            <td class="centered" >${option.dagensLunch}</td>
+            <td class="centered">
+            <span id="editBtn" onClick="showModal('${option.id}')">Redigera</span><br>
+            <span id="deleteBtn" onClick="deleteItem('${option.id}')">Radera</span>
+            </td></tr>`
+            
         });
       }
 
+}
 
-    // write out beer options
-    const beerEl = document.getElementById("beer-list");
-    if (beerEl !== null) {
-        beerEl.innerHTML = "";
-        menu.forEach(beer =>  {
-            if (beer.category == "beer") {
-            beerEl.innerHTML +=
-            `<tr class="item"><td class="centered">${beer.id}</td>
-            <td class="centered">${beer.itemName}</td>
-            <td class="desc">${beer.itemDesc}</td>
-            <td class="centered">${beer.img}</td>
-            <td scope="row" class="centered"><span id="editBtn" onClick="showModal('${beer.id}')">Edit</span></td>
-            <td scope="row" class="centered"><span id="deleteBtn" onClick="deleteItem('${beer.id}')">Delete</span></td>
-            </tr>`
-            }
-        });
-    }
+const submitBtn = document.getElementById("submit");
+submitBtn.addEventListener("click", addItem);
 
-    // write out sides options
-    const optionsEl = document.getElementById("options-list");
-    if (optionsEl !== null) {
-        optionsEl.innerHTML = "";
-        menu.forEach(options =>  {
-            if (options.category == "sides" || options.category == "läsk" || options.category == "efterrätt" || options.category == "lättöl" ) {
-            optionsEl.innerHTML +=
-            `<tr id="id-${options.id}" class="item">
-            <td class="centered">${options.id}</td>
-            <td class="centered" id="name-${options.id}" contenteditable>${options.itemName}</td>
-            <td class="centered" id="category-${options.id}" contenteditable>${options.category}</td>
-            <td scope="row" class="centered"><span id="editBtn" onClick="updateItem('${options.id}')">Edit</span></td>
-            <td scope="row" class="centered"><span id="deleteBtn" onClick="deleteItem('${options.id}')">Delete</span></td>
-            </tr>`
-            }
-        });
+// Add a menu item
+function addItem(event) {
+    event.preventDefault(); // prevents default to reload page
+    let name = nameInput.value;
+    let desc = descInput.value;
+    let category = categoryInput.value;
+    let img = imgInput.value;
 
-        // let deleteEL = document.getElementsByClassName("deleteBtn");
-        // let editEL = document.getElementsByClassName("editBtn");
+    let jsonStr = JSON.stringify({
+        itemName : name,
+        itemDesc : desc,
+        category : category,
+        img : img
+    });
 
-        // for(let i=0; i<deleteEL.length; i++) {
-        //     deleteEl[i].addEventListener("click", deleteItem);
-        //     editEl[i].addEventListener("click", updateItem);
-        // }
-    }
+    fetch(url, {
+        method: "POST",
+        headers: {
+            "content-type": "application/json"
+        },
+        body: jsonStr
+    })
+
+    .then(response => console.log(response))
+    .then(response => response.json())
+    .then(data => clearForm())
+    .catch(err => console.log(err))
+}
+
+// clear the form
+function clearForm() {
+    nameInput = "";
+    descInput = "";
+    categoryInput = "";
+    imgInput = "";
+    
+    getMenu();
 }
 
 // Delete an item
@@ -116,18 +114,110 @@ function deleteItem(id) {
     .catch(err => console.log(err))
 }
 
-function updateItem(id) {
-    // let id = event.target.dataset.id;
-    let itemName = document.getElementById("name-" + id).innerHTML;
-    let category = document.getElementById("category-" + id).innerHTML;
+// function updateItem(event) {
+//     let id = event.target.dataset.id;
+//     let itemName = document.getElementById("name-" + id).innerHTML;
+//     let category = document.getElementById("category-" + id).innerHTML;
+
+//     let jsonStr = JSON.stringify({
+//         id : id,
+//         itemName : itemName,
+//         // itemDesc : itemDesc,
+//         // img : img,
+//         // dagensLunch : dagensLunch,
+//         category : category
+//     });
+
+//     fetch(url, {
+//         method: "PUT",
+//         headers: {
+//             "content-type": "application/json"
+//         },
+//         body: jsonStr
+//     })
+//     .then(response => console.log(response))
+//     .then(response => response.json())
+//     .then(response => console.log(response))
+//     //.then(data => getMenu())
+//     //.catch(err => console.log(err))
+// }
+
+
+
+// MODUL ------------------------------------------------------
+
+
+// MODAL-----------------------------------
+const modal = document.querySelector(".modal");
+const closeBtn = document.querySelector(".close-button");
+const modalEl = document.getElementById("modal");
+
+closeBtn.addEventListener("click", hideModal);
+
+// hides modal on click of close btn
+function hideModal(){
+    modal.classList.toggle("show-modal");
+}
+
+// toggles popup with form to edit course
+function showModal(id) {
+    fetch(url + "?id=" + id, {
+        method: "GET"
+    })
+    .then(response => response.json())
+    .then(data => sendToForm(data)) // send data to form in modal
+    .catch(err => console.log(err))
+}
+
+// prepares form with content
+function sendToForm(data) {
+    modalEl.innerHTML = `<div>
+    <label for="id">ID:</label><br>
+    <input type="text" name="code" id="id" value="${data.id}" readonly><br>
+    </div><div>
+    <label for="itemName">Namn:</label><br>
+    <input type="text" name="itemName" id="itemName" value="${data.itemName}"><br>
+    </div><div>
+    <label for="itemDesc">Beskrivningen</label><br>
+    <input type="text" name="itemDesc" id="itemDesc" value="${data.itemDesc}"><br>
+    </div><div>
+    <label for="category">Kategori:</label><br>
+    <input type="text" name="category" id="category" value="${data.category}"><br>
+    </div><div>
+    <label for="img">Bild Filnamn:</label><br>
+    <input type="text" name="img" id="img" value="${data.img}"><br>
+    </div>
+    <input class="btn" type="submit" id="saveBtn" value="Uppdatera"></input>`;
+
+    modal.classList.toggle("show-modal");
+    
+    const saveBtn = document.querySelector("#saveBtn");
+    saveBtn.addEventListener("click", saveChanges);
+}
+
+// Save changes to a menu item
+function saveChanges() {
+    
+    const idModal = document.getElementById("id");
+    const nameModal = document.getElementById("name");
+    const descModal = document.getElementById("desc");
+    const imgModal = document.getElementById("img");
+    const categoryModal = document.getElementById("category");
+    const dagensModal = document.getElementById("dagens");
+    let id = idModal.value;
+    let name = nameModal.value;
+    let desc = descModal.value;
+    let img = imgModal.value;
+    let category = categoryModal.value;
+    let dagens = dagensModal.value;
 
     let jsonStr = JSON.stringify({
         id : id,
-        itemName : itemName,
-        // itemDesc : itemDesc,
-        // img : img,
-        // dagensLunch : dagensLunch,
-        category : category
+        itemName : name,
+        itemDesc : desc,
+        img : img,
+        category : category,
+        dagensLunch : dagens
     });
 
     fetch(url, {
@@ -137,12 +227,13 @@ function updateItem(id) {
         },
         body: jsonStr
     })
+    // .then(response => console.log(jsonStr))
     .then(response => response.json())
-    .then(data => getMenu())
+    .then(data => getMenu()) 
     .catch(err => console.log(err))
+
+    
 }
-
-
 
 
 

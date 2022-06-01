@@ -91,10 +91,6 @@ tr:nth-child(even) {
 tr:nth-child(odd) {
   background-color: #ffffff50; }
 
-td[scope="row"],
-th[scope="row"] {
-  background-color: #000 !important; }
-
 th.centered,
 td.centered {
   text-align: center; }
@@ -108,7 +104,7 @@ td.desc {
 #deleteBtn {
   background-color: #DDA239;
   padding: 0 1%;
-  line-height: 1em;
+  line-height: 2em;
   border-radius: 10%; }
 
 td #editBtn,
@@ -595,6 +591,13 @@ section#booking-form {
   padding: 2%;
   margin: 3% auto;
   min-height: 150px; }
+
+form#addNew {
+  background-color: transparent;
+  display: block;
+  max-width: inherit;
+  margin: 0;
+  padding: 0; }
 
 form {
   background-color: #3c3c3c;

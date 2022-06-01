@@ -67,14 +67,13 @@ function writeBookings(bookings) {
             <td class="centered" >${booking.telephone}</td>
             <td class="centered" >${booking.email}</td>
             <td class="centered">
-            <span id="editBtn" onClick="showModal('${booking.id}')">Redigera</span><br>
-            <span id="deleteBtn" onClick="deleteItem('${booking.id}')">Radera</span>
+           
             </td></tr>`
         });
     }
 
 }
-
+//<span id="editBtn" onClick="showModal('${booking.id}')">Redigera</span><br><span id="deleteBtn" onClick="deleteItem('${booking.id}')">Radera</span>
 // const submitBtn = document.getElementById("submit");
 // submitBtn.addEventListener("click", addItem);
 
@@ -118,8 +117,8 @@ function writeMenus(menu) {
 
 }
 
-const submitBtn = document.getElementById("submit");
-// submitBtn.addEventListener("click", addItem);
+const submitBtn = document.getElementById("submit-addnew");
+submitBtn.addEventListener("click", addItem);
 
 // Add a menu item
 function addItem(event) {
@@ -177,7 +176,7 @@ const modal = document.querySelector(".modal");
 const closeBtn = document.querySelector(".close-button");
 const modalEl = document.getElementById("modal");
 
-// closeBtn.addEventListener("click", hideModal);
+closeBtn.addEventListener("click", hideModal);
 
 // hides modal on click of close btn
 function hideModal(){
@@ -219,7 +218,7 @@ function sendToForm(data) {
     modal.classList.toggle("show-modal");
     
     const saveBtn = document.querySelector("#saveBtn");
-    // saveBtn.addEventListener("click", saveChanges);
+    saveBtn.addEventListener("click", saveChanges);
 }
 
 // Save changes to a menu item

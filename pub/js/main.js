@@ -1,7 +1,8 @@
 "use strict";
 
-//let url = "http://localhost/173%20project/webservice/site-api.php";
-let url = "https://nataliesalomons.com/miun/dt173g/project/webservice/site-api.php";
+//let urlMenu = "http://localhost/173%20project/webservice/site-api.php";
+let urlMenu = "https://nataliesalomons.com/miun/dt173g/project/webservice/site-api.php";
+let urlBookings = "https://nataliesalomons.com/miun/dt173g/project/webservice/bookings.php";
 
 
 // category: "lättöl"
@@ -16,13 +17,71 @@ window.onload = init;
 
 function init() {
     // fetch data from database
-    getMenu(); // includes user
+    getMenu(); 
+    getBookings();
 }
+
+
+// Bookings ---------------------------
+function getBookings() {
+    fetch(urlBookings)
+    .then(response => {
+        if(response.status != 200) {
+            return
+        }
+        return response.json()
+        //.then(data => console.log(data))
+        .then(data => writeBookings(data))
+        .catch(err => console.log(err))
+    })
+}
+
+// created: "2022-06-11 14:04:24"
+// dateOfBooking: "2022-06-07"
+// email: "natalie.salomons@gmail.com"
+// fullName: "Natalie Frick"
+// id: "1"
+// nrPeople: "2"
+// telephone: "0730 12 34 56"
+// timeOfBooking: "14:00"
+
+
+// write out bookings to webpage
+function writeBookings(bookings) {
+    // console.log(bookings);
+
+    // Separate out bookings for today
+    var today = new Date();// Get today's date
+
+    const todayEl = document.getElementById("bookings-list-today");
+    // const laterEl = document.getElementById("bookings-list-later");
+    if (todayEl !== null) {
+        todayEl.innerHTML = "";
+        bookings.forEach(booking =>  {
+             todayEl.innerHTML +=
+            `<tr class="item"><td class="centered">${booking.id}</td>
+            <td class="centered" >${booking.dateOfBooking}</td>
+            <td class="centered" >${booking.timeOfBooking}</td>
+            <td class="centered" >${booking.nrPeople}</td>
+            <td class="centered">${booking.fullName}</td>
+            <td class="centered" >${booking.telephone}</td>
+            <td class="centered" >${booking.email}</td>
+            <td class="centered">
+            <span id="editBtn" onClick="showModal('${booking.id}')">Redigera</span><br>
+            <span id="deleteBtn" onClick="deleteItem('${booking.id}')">Radera</span>
+            </td></tr>`
+        });
+    }
+
+}
+
+// const submitBtn = document.getElementById("submit");
+// submitBtn.addEventListener("click", addItem);
 
 
 // MENU ---------------------------
 function getMenu() {
-    fetch(url)
+    fetch(urlMenu)
     .then(response => {
         if(response.status != 200) {
             return
@@ -60,7 +119,7 @@ function writeMenus(menu) {
 }
 
 const submitBtn = document.getElementById("submit");
-submitBtn.addEventListener("click", addItem);
+// submitBtn.addEventListener("click", addItem);
 
 // Add a menu item
 function addItem(event) {
@@ -77,7 +136,7 @@ function addItem(event) {
         img : img
     });
 
-    fetch(url, {
+    fetch(urlMenu, {
         method: "POST",
         headers: {
             "content-type": "application/json"
@@ -105,7 +164,7 @@ function clearForm() {
 function deleteItem(id) {
     // let id = event.target.dataset.id;
     // console.log("delete item" + id);
-    fetch(url + "?id=" + id, {
+    fetch(urlMenu + "?id=" + id, {
         method: "DELETE"
     })
     .then(response => response.json())
@@ -113,45 +172,12 @@ function deleteItem(id) {
     .catch(err => console.log(err))
 }
 
-// function updateItem(event) {
-//     let id = event.target.dataset.id;
-//     let itemName = document.getElementById("name-" + id).innerHTML;
-//     let category = document.getElementById("category-" + id).innerHTML;
-
-//     let jsonStr = JSON.stringify({
-//         id : id,
-//         itemName : itemName,
-//         // itemDesc : itemDesc,
-//         // img : img,
-//         // dagensLunch : dagensLunch,
-//         category : category
-//     });
-
-//     fetch(url, {
-//         method: "PUT",
-//         headers: {
-//             "content-type": "application/json"
-//         },
-//         body: jsonStr
-//     })
-//     .then(response => console.log(response))
-//     .then(response => response.json())
-//     .then(response => console.log(response))
-//     //.then(data => getMenu())
-//     //.catch(err => console.log(err))
-// }
-
-
-
-// MODUL ------------------------------------------------------
-
-
 // MODAL-----------------------------------
 const modal = document.querySelector(".modal");
 const closeBtn = document.querySelector(".close-button");
 const modalEl = document.getElementById("modal");
 
-closeBtn.addEventListener("click", hideModal);
+// closeBtn.addEventListener("click", hideModal);
 
 // hides modal on click of close btn
 function hideModal(){
@@ -160,7 +186,7 @@ function hideModal(){
 
 // toggles popup with form to edit course
 function showModal(id) {
-    fetch(url + "?id=" + id, {
+    fetch(urlMenu + "?id=" + id, {
         method: "GET"
     })
     .then(response => response.json())
@@ -193,7 +219,7 @@ function sendToForm(data) {
     modal.classList.toggle("show-modal");
     
     const saveBtn = document.querySelector("#saveBtn");
-    saveBtn.addEventListener("click", saveChanges);
+    // saveBtn.addEventListener("click", saveChanges);
 }
 
 // Save changes to a menu item
@@ -221,7 +247,7 @@ function saveChanges() {
         dagensLunch : dagens
     });
 
-    fetch(url, {
+    fetch(urlMenu, {
         method: "PUT",
         headers: {
             "content-type": "application/json"

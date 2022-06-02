@@ -47,6 +47,7 @@ include_once("incl/config.php");
                     <!-- Overlay content -->
                     <div class="overlay-content">
                         <a href="index.html">Start</a>
+                        <a href="bookings.php">Bookings</a>
                         <a href="admin.php">Admin Dashboard</a>
                     </div>
                 </div>

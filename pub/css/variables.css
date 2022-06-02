@@ -100,6 +100,8 @@ td.desc {
   max-width: 250px;
   word-wrap: break-word; }
 
+.editBtn,
+.deleteBtn,
 #editBtn,
 #deleteBtn {
   background-color: #DDA239;
@@ -107,16 +109,21 @@ td.desc {
   line-height: 2em;
   border-radius: 10%; }
 
+td .editBtn,
+td .deleteBtn,
 td #editBtn,
 td #deleteBtn {
   color: #000 !important;
   text-align: center; }
 
+td .editBtn:hover,
+td .deleteBtn:hover,
 td #editBtn:hover,
 td #deleteBtn:hover {
   color: #DDA239 !important;
   cursor: pointer; }
 
+td .editBtn,
 td #editBtn {
   padding: 2px 11px; }
 

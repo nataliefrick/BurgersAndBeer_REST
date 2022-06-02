@@ -135,6 +135,8 @@ td.desc {
     word-wrap: break-word;
 }
 
+.editBtn,
+.deleteBtn,
 #editBtn,
 #deleteBtn {
     background-color: $yellow;
@@ -143,18 +145,23 @@ td.desc {
     border-radius: 10%;
 }
 
+td .editBtn,
+td .deleteBtn,
 td #editBtn,
 td #deleteBtn {
     color: $black!important;
     text-align: center;
 }
 
+td .editBtn:hover,
+td .deleteBtn:hover,
 td #editBtn:hover,
 td #deleteBtn:hover {
     color: $yellow!important;
     cursor: pointer;
 }
 
+td .editBtn,
 td #editBtn {
     padding: 2px 11px;
 }

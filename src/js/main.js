@@ -4,15 +4,6 @@
 let urlMenu = "https://nataliesalomons.com/miun/dt173g/project/webservice/site-api.php";
 let urlBookings = "https://nataliesalomons.com/miun/dt173g/project/webservice/bookings-admin.php";
 
-
-// category: "lättöl"
-// created: "2022-05-30 16:56:20"
-// dagensLunch: ""
-// id: "25"
-// img: ""
-// itemDesc: ""
-// itemName: "Carlsberg"
-
 window.onload = init;
 
 function init() {
@@ -20,7 +11,6 @@ function init() {
     getMenu();
     getBookings();
 }
-
 
 // Bookings ---------------------------
 function getBookings() {
@@ -36,19 +26,9 @@ function getBookings() {
     })
 }
 
-// created: "2022-06-11 14:04:24"
-// dateOfBooking: "2022-06-07"
-// email: "natalie.salomons@gmail.com"
-// fullName: "Natalie Frick"
-// id: "1"
-// nrPeople: "2"
-// telephone: "0730 12 34 56"
-// timeOfBooking: "14:00"
-
-
 // write out bookings to webpage
 function writeBookings(bookings) {
-    console.log(bookings);
+    // console.log(bookings);
 
     // Separate out bookings for today
     // var today = new Date();// Get today's date
@@ -59,24 +39,97 @@ function writeBookings(bookings) {
         todayEl.innerHTML = "";
         bookings.forEach(booking =>  {
              todayEl.innerHTML +=
-            `<tr class="item"><td class="centered">${booking.id}</td>
-            <td class="centered" >${booking.dateOfBooking}</td>
-            <td class="centered" >${booking.timeOfBooking}</td>
-            <td class="centered" >${booking.nrPeople}</td>
-            <td class="centered">${booking.fullName}</td>
-            <td class="centered" >${booking.telephone}</td>
-            <td class="centered" >${booking.email}</td>
+            `<tr class="item"><td id="${booking.id}" class="centered">${booking.id}</td>
+            <td class="centered" id="date-${booking.id}">${booking.dateOfBooking}</td>
+            <td class="centered" id="time-${booking.id}">${booking.timeOfBooking}</td>
+            <td class="centered" id="nrP-${booking.id}">${booking.nrPeople}</td>
+            <td class="centered" id="name-${booking.id}">${booking.fullName}</td>
+            <td class="centered" id="tel-${booking.id}">${booking.telephone}</td>
+            <td class="centered" id="email-${booking.id}">${booking.email}</td>
             <td class="centered">
-
+            <span id="deleteBtn" onClick="deleteBooking('${booking.id}')">Radera</span>
             </td></tr>`
         });
     }
 
 }
-//<span id="editBtn" onClick="showModal('${booking.id}')">Redigera</span><br><span id="deleteBtn" onClick="deleteItem('${booking.id}')">Radera</span>
-// const submitBtn = document.getElementById("submit");
-// submitBtn.addEventListener("click", addItem);
 
+/* <span data-id=${booking.id} class="editBtn">Redigera</span>
+            </td>
+            <td class="centered">
+            <span data-id=${booking.id} class="deleteBtn">Radera</span>
+let updateBtn = document.getElementsByClassName("editBtn");
+let deleteBtn = document.getElementsByClassName("deleteBtn");
+
+for(let i = 0; i < deleteBtn.length; i++){
+    deleteBtn[i].addEventListener("click", deleteBooking);
+    updateBtn[i].addEventListener("click", updateBooking);
+} */
+
+// Add a menu item
+function updateBooking(event) {
+    event.preventDefault(); // prevents default to reload page
+    id = event.target.dataset.id
+    
+    // document.getElementById("date-" + id).value; 
+    // document.getElementById("time-" + id).value; 
+    // document.getElementById("nrP-" + id).value; 
+    // document.getElementById("name-" + id).value; 
+    // document.getElementById("tel-" + id).value; 
+    // document.getElementById("email-" + id).value;
+
+    
+    let newDate = document.getElementById("date-" + id).value;
+    let newTime = document.getElementById("time-" + id).value; 
+    let newNrP = document.getElementById("nrP-" + id).value; 
+    let newName = document.getElementById("name-" + id).value; 
+    let newTel = document.getElementById("tel-" + id).value; 
+    let newEmail = document.getElementById("email-" + id).value;
+
+
+    // console.log(newName + "<br>" + desc + "<br>" + dagens + "<br>" + category + "<br>" + img);
+
+    let jsonStr = JSON.stringify({
+        id : id,
+        dateOfBooking : newDate,
+        timeOfBooking : newTime,
+        nrPeople : newNrP,
+        fullName : newName,
+        telephone : newTel,
+        email: newEmail
+    });
+
+    // console.log(jsonStr);
+    // console.log(urlMenu);
+
+    fetch(urlMenu, {
+        method: "PUT",
+        headers: {
+            "content-type": "application/json"
+        },
+        body: jsonStr
+    })
+
+    .then(response => response.json())
+    // .then(response => console.log(response))
+    .then(event => getBookings())
+    .catch(err => console.log(err))
+}
+
+
+
+
+// Delete an item
+function deleteBooking(id) {
+    // let id = event.target.dataset.id;
+    // console.log("delete item" + id);
+    fetch(urlBookings + "?id=" + id, {
+        method: "DELETE"
+    })
+    .then(response => response.json())
+    .then(data => getBookings())
+    .catch(err => console.log(err))
+}
 
 // MENU ---------------------------
 function getMenu() {

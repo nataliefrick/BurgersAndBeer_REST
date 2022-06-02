@@ -26,7 +26,7 @@ include("incl/header.php");
                 <th></th>
             </tr>
         </thead>
-        <h3>Todays Bookings</h3>
+        <h3>Bookings Ordered by Date</h3>
         <tbody id="bookings-list-today">
         </tbody>
     </table>

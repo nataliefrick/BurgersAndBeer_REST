@@ -9,7 +9,7 @@ include("incl/header.php");
 
 // Check to see if user is logged in
 if (isset($_SESSION["admin"])) { // if yes - direct to admin.php dashboard
-    header("Location: admin.php");
+    header("Location: bookings.php");
 }
 
 // Check to see if this is a redirect with info from POST form

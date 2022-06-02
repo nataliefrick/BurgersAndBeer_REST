@@ -229,17 +229,22 @@ form#modal {
 form#modal label {
     font-size: 0.8em;
     padding-top: 2%;
+    padding-left: 6px;
 }
 
 form#modal input,
 form#modal div {
-    margin: 0 auto;
+    margin: 2px 5px;
 }
 
 form#modal input.btn {
     margin-top: 20px;
 }
 
+div.dropdown {
+    padding-top: 6px;
+    padding-bottom: 6px;
+}
 
 
 

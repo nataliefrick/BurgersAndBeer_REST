@@ -208,6 +208,35 @@ function showModal(id) {
 
 // prepares form with content
 function sendToForm(data) {
+    let categories = ["burgare", "beer", "sides", "läsk", "lättöl", "efterrätt"];
+    let dagensDagar = ["måndag", "tisdag", "onsdag", "torsdag", "fredag", "lördag"];
+    let categoryDD = "";
+    categories.forEach(category =>  {
+        if (category == data.category) {
+            categoryDD +=
+            `<option value="${category}" selected="selected">${category}</option>`
+        } else {
+            categoryDD +=
+            `<option value="${category}" >${category}</option>`  
+        }
+    });
+
+    let dagensDD = "";
+    dagensDagar.forEach(dag =>  {
+        if (dag == data.dagensLunch) {
+            dagensDD +=
+            `<option value="${dag}" selected="selected">${dag}</option>`
+        } else {
+            dagensDD +=
+            `<option value="${dag}" >${dag}</option>`  
+        }
+    });
+      
+    
+
+    
+
+
     if(data.category == "burger") {
         modalEl.innerHTML = `<div>
         <label for="id">ID:</label><br>
@@ -216,17 +245,21 @@ function sendToForm(data) {
         <label for="itemName">Namn:</label><br>
         <input type="text" name="itemName" id="itemName" value="${data.itemName}"><br>
         </div><div>
-        <label for="itemDesc">Beskrivningen</label><br>
+        <label for="itemDesc">Beskrivningen</label>
         <input type="text" name="itemDesc" id="itemDesc" value="${data.itemDesc}"><br>
-        </div><div>
-        <label for="category">Kategori:</label><br>
-        <input type="text" name="category" id="category" value="${data.category}"><br>
+        </div><div class="dropdown">
+        <label for="category">Kategori:</label>
+        <select id="category" name="category">
+            ${categoryDD}
+        </select><br>
         </div><div>
         <label for="img">Bild Filnamn:</label><br>
         <input type="text" name="img" id="img" value="${data.img}"><br>
-        </div><div>
-        <label for="dagensLunch">Dagens Lunch:</label><br>
-        <input type="text" name="dagensLunch" id="dagensLunch" value="${data.dagensLunch}"><br>
+        </div><div class="dropdown">
+        <label for="dagensLunch">Dagens Lunch:</label>
+        <select id="dagensLunch" name="dagensLunch">
+            ${dagensDD}
+        </select><br>
         </div>
         <input class="btn" type="submit" id="saveBtn" value="Uppdatera"></input>`;
     } else {
@@ -239,9 +272,11 @@ function sendToForm(data) {
         </div><div>
         <label for="itemDesc">Beskrivningen</label><br>
         <input type="text" name="itemDesc" id="itemDesc" value="${data.itemDesc}"><br>
-        </div><div>
-        <label for="category">Kategori:</label><br>
-        <input type="text" name="category" id="category" value="${data.category}"><br>
+        </div><div class="dropdown">
+        <label for="category">Kategori:</label>
+        <select id="category" name="category">
+            ${categoryDD}
+        </select><br>
         </div><div>
         <label for="img">Bild Filnamn:</label><br>
         <input type="text" name="img" id="img" value="${data.img}"><br>

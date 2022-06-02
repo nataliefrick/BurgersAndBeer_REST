@@ -30,7 +30,7 @@ include("incl/header.php");
         <tbody id="bookings-list-today">
         </tbody>
     </table>
-
-
+    <div class="dont-show" id="submit-addnew"></div>
+    <div class="dont-show close-button" id="close-button"></div>
 <?php
 include("incl/footer.php");

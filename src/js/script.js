@@ -2,7 +2,7 @@
 
 //let urlMenu = "http://localhost/173%20project/webservice/site-api.php";
 let urlMenu = "https://nataliesalomons.com/miun/dt173g/project/webservice/site-api.php";
-let urlBookings = "https://nataliesalomons.com/miun/dt173g/project/webservice/bookings.php";
+let urlBookings = "https://nataliesalomons.com/miun/dt173g/project/webservice/bookings-admin.php";
 
 
 // category: "lättöl"
@@ -30,7 +30,7 @@ function getBookings() {
             return
         }
         return response.json()
-        //.then(data => console.log(data))
+        // .then(data => console.log(data))
         .then(data => writeBookings(data))
         .catch(err => console.log(err))
     })
@@ -48,10 +48,10 @@ function getBookings() {
 
 // write out bookings to webpage
 function writeBookings(bookings) {
-    // console.log(bookings);
+    console.log(bookings);
 
     // Separate out bookings for today
-    var today = new Date();// Get today's date
+    // var today = new Date();// Get today's date
 
     const todayEl = document.getElementById("bookings-list-today");
     // const laterEl = document.getElementById("bookings-list-later");
@@ -155,7 +155,7 @@ function addItem(event) {
         },
         body: jsonStr
     })
-    
+
     .then(response => response.json())
     // .then(response => console.log(response))
     .then(event => refreshScreen())
@@ -217,7 +217,7 @@ function sendToForm(data) {
             `<option value="${category}" selected="selected">${category}</option>`
         } else {
             categoryDD +=
-            `<option value="${category}" >${category}</option>`  
+            `<option value="${category}" >${category}</option>`
         }
     });
 
@@ -228,13 +228,13 @@ function sendToForm(data) {
             `<option value="${dag}" selected="selected">${dag}</option>`
         } else {
             dagensDD +=
-            `<option value="${dag}" >${dag}</option>`  
+            `<option value="${dag}" >${dag}</option>`
         }
     });
-      
-    
 
-    
+
+
+
 
 
     if(data.category == "burger") {

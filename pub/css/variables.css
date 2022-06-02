@@ -218,6 +218,7 @@ section#upload-file form input {
   border: 1px solid #DDA23950; }
 
 span.errormsg {
+  padding: 2%;
   color: #DDA239;
   text-align: center; }
 

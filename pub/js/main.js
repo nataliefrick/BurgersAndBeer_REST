@@ -17,7 +17,7 @@ window.onload = init;
 
 function init() {
     // fetch data from database
-    getMenu(); 
+    getMenu();
     getBookings();
 }
 
@@ -67,7 +67,7 @@ function writeBookings(bookings) {
             <td class="centered" >${booking.telephone}</td>
             <td class="centered" >${booking.email}</td>
             <td class="centered">
-           
+
             </td></tr>`
         });
     }
@@ -111,32 +111,42 @@ function writeMenus(menu) {
             <span id="editBtn" onClick="showModal('${option.id}')">Redigera</span><br>
             <span id="deleteBtn" onClick="deleteItem('${option.id}')">Radera</span>
             </td></tr>`
-            
+
         });
       }
 
 }
 
+
 const submitBtn = document.getElementById("submit-addnew");
 submitBtn.addEventListener("click", addItem);
+let newNameEl = document.getElementById('nameInput');
+let descEl = document.getElementById('descInput');
+let categoryEl = document.getElementById('categoryInput');
+let imgEl = document.getElementById('imgInput');
+let responseEl = document.getElementById('response');
 
 // Add a menu item
 function addItem(event) {
     event.preventDefault(); // prevents default to reload page
-    console.log("addItem22");
-    let name = document.getElementById('nameInput').innerHTML.value;
-    let desc = document.getElementById('descInput').value;
-    let category = document.getElementById('categoryInput').value;
-    let img = document.getElementById('imgInput').value;
+    let newName = newNameEl.value;
+    let desc = descEl.value;
+    let category = categoryEl.value;
+    let img = imgEl.value;
     let dagens = "";
 
+    // console.log(newName + "<br>" + desc + "<br>" + dagens + "<br>" + category + "<br>" + img);
+
     let jsonStr = JSON.stringify({
-        itemName : name,
+        itemName : newName,
         itemDesc : desc,
         dagensLunch : dagens,
         category : category,
         img : img
     });
+
+    // console.log(jsonStr);
+    // console.log(urlMenu);
 
     fetch(urlMenu, {
         method: "POST",
@@ -145,20 +155,20 @@ function addItem(event) {
         },
         body: jsonStr
     })
-
-    .then(response => console.log(response))
+    
     .then(response => response.json())
-    .then(data => console.log("additem"))
+    // .then(response => console.log(response))
+    .then(event => refreshScreen())
     .catch(err => console.log(err))
 }
 
 // clear the form
-function clearForm() {
-    nameInput = "";
-    descInput = "";
-    categoryInput = "";
-    imgInput = "";
-    
+function refreshScreen() {
+    newNameEl.value = "";
+    descEl.value = "";
+    categoryEl.value = "";
+    imgEl.value = "";
+
     getMenu();
 }
 
@@ -198,36 +208,58 @@ function showModal(id) {
 
 // prepares form with content
 function sendToForm(data) {
-    modalEl.innerHTML = `<div>
-    <label for="id">ID:</label><br>
-    <input type="text" name="code" id="id" value="${data.id}" readonly><br>
-    </div><div>
-    <label for="itemName">Namn:</label><br>
-    <input type="text" name="itemName" id="itemName" value="${data.itemName}"><br>
-    </div><div>
-    <label for="itemDesc">Beskrivningen</label><br>
-    <input type="text" name="itemDesc" id="itemDesc" value="${data.itemDesc}"><br>
-    </div><div>
-    <label for="category">Kategori:</label><br>
-    <input type="text" name="category" id="category" value="${data.category}"><br>
-    </div><div>
-    <label for="img">Bild Filnamn:</label><br>
-    <input type="text" name="img" id="img" value="${data.img}"><br>
-    </div><div>
-    <label for="dagensLunch">Dagens Lunch:</label><br>
-    <input type="text" name="dagensLunch" id="dagensLunch" value="${data.dagensLunch}"><br>
-    </div>
-    <input class="btn" type="submit" id="saveBtn" value="Uppdatera"></input>`;
-
+    if(data.category == "burger") {
+        modalEl.innerHTML = `<div>
+        <label for="id">ID:</label><br>
+        <input type="text" name="code" id="id" value="${data.id}" readonly><br>
+        </div><div>
+        <label for="itemName">Namn:</label><br>
+        <input type="text" name="itemName" id="itemName" value="${data.itemName}"><br>
+        </div><div>
+        <label for="itemDesc">Beskrivningen</label><br>
+        <input type="text" name="itemDesc" id="itemDesc" value="${data.itemDesc}"><br>
+        </div><div>
+        <label for="category">Kategori:</label><br>
+        <input type="text" name="category" id="category" value="${data.category}"><br>
+        </div><div>
+        <label for="img">Bild Filnamn:</label><br>
+        <input type="text" name="img" id="img" value="${data.img}"><br>
+        </div><div>
+        <label for="dagensLunch">Dagens Lunch:</label><br>
+        <input type="text" name="dagensLunch" id="dagensLunch" value="${data.dagensLunch}"><br>
+        </div>
+        <input class="btn" type="submit" id="saveBtn" value="Uppdatera"></input>`;
+    } else {
+        modalEl.innerHTML = `<div>
+        <label for="id">ID:</label><br>
+        <input type="text" name="code" id="id" value="${data.id}" readonly><br>
+        </div><div>
+        <label for="itemName">Namn:</label><br>
+        <input type="text" name="itemName" id="itemName" value="${data.itemName}"><br>
+        </div><div>
+        <label for="itemDesc">Beskrivningen</label><br>
+        <input type="text" name="itemDesc" id="itemDesc" value="${data.itemDesc}"><br>
+        </div><div>
+        <label for="category">Kategori:</label><br>
+        <input type="text" name="category" id="category" value="${data.category}"><br>
+        </div><div>
+        <label for="img">Bild Filnamn:</label><br>
+        <input type="text" name="img" id="img" value="${data.img}"><br>
+        </div><div>
+        <label for="dagensLunch">Dagens Lunch:</label><br>
+        <input type="text" name="dagensLunch" id="dagensLunch" value="ej möjligt" readonly><br>
+        </div>
+        <input class="btn" type="submit" id="saveBtn" value="Uppdatera"></input>`;
+    }
     modal.classList.toggle("show-modal");
-    
+
     const saveBtn = document.querySelector("#saveBtn");
     saveBtn.addEventListener("click", saveChanges);
 }
 
 // Save changes to a menu item
 function saveChanges() {
-    
+
     const idModal = document.getElementById("id");
     // const nameModal = document.getElementById("name");// wrong name
     const nameModal = document.getElementById("itemName");// wrong name
@@ -261,10 +293,10 @@ function saveChanges() {
     })
     // .then(response => console.log(jsonStr))
     .then(response => response.json())
-    .then(data => getMenu()) 
+    .then(data => getMenu())
     .catch(err => console.log(err))
 
-    
+
 }
 
 

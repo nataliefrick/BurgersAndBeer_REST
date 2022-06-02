@@ -30,7 +30,17 @@ if ($handle = opendir('img/')) {
         <p><span class="bold">Uppdatera: </span>Webbplasten använder "content-edible" redigering. Gör ändringar direkt in i tabellen och sedan spara ändringar. </p>
         <p><span class="bold">Lägga till: </span>Steg 1 är att ladda upp en bild. Steg två är att fylla i formuläret. Steg 3: tryck på "lägg till" knappen.</p>
         <p><span class="bold">Ta-bort: </span>Klicka på ta-bort knappen. </p>
+        <!-- message -->
+        <span class="errormsg">
+            <?php
+            if(isset($_SESSION['msg'])) {
+                echo $_SESSION['msg'];
+            }
+            unset($_SESSION['msg']);
+            ?>
+        </span>
     </div>
+
 
 
 
@@ -42,15 +52,6 @@ if ($handle = opendir('img/')) {
             <input type="file" name="fileToUpload" id="fileToUpload">
             <input type="submit" value="ok" name="submit" id="fileupload">
         </form>
-        <!-- message -->
-        <span class="errormsg">
-            <?php
-            if(isset($_SESSION['msg'])) {
-                echo $_SESSION['msg'];
-            }
-            unset($_SESSION['msg']);
-            ?>
-        </span>
     </section>
 
     <section id="add-newItem">
@@ -86,7 +87,6 @@ if ($handle = opendir('img/')) {
                         </select>
                         </td>
                         <td><input class="btn" type="submit" id="submit-addnew" value="Lägg till"></input></td>
-                        <!-- <td><input id="submit-addnew" type="submit"  onClick="addItem" value="Lägg till"></input></td> -->
                     </tr>
                 </tbody>
             </table>

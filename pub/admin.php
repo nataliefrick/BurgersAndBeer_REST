@@ -60,7 +60,6 @@ if ($handle = opendir('img/')) {
             <table>
                 <thead>
                     <tr>
-                        <th class="centered">Id</th>
                         <th class="centered"><label for="nameInput">Namn:</label></th>
                         <th class="centered"><label for="categoryInput">Kategori:</label></th>
                         <th class="centered desc"><label for="descInput">Beskrivningen</label></th>
@@ -70,7 +69,6 @@ if ($handle = opendir('img/')) {
                 </thead>
                 <tbody>
                     <tr class="item">
-                        <td></td>
                         <td><input type="text" name="nameInput" id="nameInput"></td>
                         <td><select id="categoryInput" name="categoryInput">
                             <option value="burgare">burgare</option>

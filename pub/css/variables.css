@@ -48,7 +48,12 @@ div#instructions {
   background-color: #3c3c3c;
   padding: 1% 2%;
   margin: 3% auto;
-  width: 600px; }
+  width: 600px;
+  line-height: 1.2em; }
+
+@media (max-width: 1024px) {
+  div#instructions {
+    width: 350px !important; } }
 
 div#instructions p {
   color: #ffffff50;
@@ -62,10 +67,12 @@ div#instructions p span.bold {
 
 table {
   border: #ffffff50;
+  display: block;
   overflow-x: auto;
   margin-left: auto;
   margin-right: auto;
-  margin-bottom: 60px; }
+  margin-bottom: 60px;
+  width: 900px; }
 
 th {
   font-family: "Fira Sans", sans-serif;
@@ -203,13 +210,17 @@ div.dropdown {
 section#upload-file {
   background-color: #3c3c3c;
   color: #fff;
-  width: 60%;
+  width: 40%;
   padding: 1%;
   margin: 3% auto;
   display: flex;
   justify-content: center;
   flex-direction: column;
   gap: 1%; }
+
+@media (max-width: 1024px) {
+  section#upload-file {
+    width: 75% !important; } }
 
 section#upload-file h3 {
   margin: 0; }
@@ -725,5 +736,61 @@ p.small {
   color: #DDA239;
   font-size: 0.7em;
   font-style: italic; }
+
+@media (max-width: 768px) {
+  #header {
+    flex-direction: column; }
+  .logo img {
+    width: 270px !important; }
+  div.nav-bar {
+    flex-direction: column;
+    margin: 3% auto; }
+  .boka-bord-btn h2:hover {
+    color: #DDA239 !important; }
+  .overlay a {
+    font-size: 1em;
+    line-height: 1.2em; }
+  section#choices {
+    flex-direction: column;
+    margin: 3% auto;
+    height: auto; }
+  div.card {
+    width: 60%;
+    max-width: 400px;
+    margin: 1% auto; }
+  div.card img {
+    width: 100%; }
+  div#insta-img {
+    flex-wrap: wrap;
+    width: 70%; }
+  section#newsletter {
+    flex-direction: column;
+    width: 100%; }
+  section#newsletter div.flex-container {
+    flex-direction: column;
+    padding: 8%; }
+  div.col-left h3, div.col-left p {
+    text-align: center; }
+  section#footer {
+    flex-direction: column;
+    width: 300px;
+    margin: 0 auto; }
+  section#menu-options div.flex-container,
+  section#title {
+    flex-direction: column; }
+  section#options,
+  section#beer-options,
+  section#burger-options {
+    flex-direction: column; }
+  section#options div.card img,
+  section#beer-options div.card img,
+  section#burger-options div.card img {
+    width: 100%; }
+  section#about {
+    width: 70%; }
+  section#about p {
+    column-count: 1; }
+  fieldset {
+    flex-direction: column; } }
 
 /*# sourceMappingURL=maps/variables.css.map */

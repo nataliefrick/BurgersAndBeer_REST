@@ -71,7 +71,15 @@ div#instructions {
     padding: 1% 2%;
     margin: 3% auto;
     width: 600px;
+    line-height: 1.2em; 
+}
 
+
+@media (max-width:1024px) {
+    div#instructions {
+        width: 350px!important;
+        
+    }
 }
 
 div#instructions p {
@@ -90,10 +98,12 @@ div#instructions p span.bold {
 
 table {
     border: $white-50;
+    display: block;
     overflow-x: auto;
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 60px;
+    width: 900px;
 }
 
 th {
@@ -260,7 +270,7 @@ div.dropdown {
 section#upload-file {
     background-color: $grey;
     color: $white;
-    width: 60%;
+    width: 40%;
     padding: 1%;
     margin: 3% auto;
     display: flex;
@@ -268,6 +278,11 @@ section#upload-file {
     flex-direction: column;
     gap: 1%;
 
+}
+
+@media (max-width:1024px) {
+    section#upload-file {
+        width: 75%!important; }
 }
 
 section#upload-file h3 {
@@ -887,5 +902,103 @@ p.small {
     font-style: italic;
 }
 
-
-// select option
+@media (max-width: 768px) {
+    #header {
+        flex-direction: column;
+    }
+    
+    .logo img {
+        width: 270px!important;
+    }
+    
+    div.nav-bar {
+        flex-direction: column;
+        margin: 3% auto;
+    }
+    
+    .boka-bord-btn h2:hover {
+        color: $yellow!important;
+    }
+    
+    .overlay a {
+        font-size: 1em;
+        line-height: 1.2em;
+    }
+    
+    // SECTION choices --------------------------
+    section#choices {
+        flex-direction: column;
+        margin: 3% auto;
+        height: auto;
+    }
+    
+    div.card {
+        width: 60%;
+        max-width: 400px;
+        margin: 1% auto;
+    }
+    
+    div.card img {
+        width: 100%;
+    }
+    
+    div#insta-img {
+        flex-wrap: wrap;
+        width: 70%;
+    }
+    
+    // anmäla nyheterna -----------------------------
+    section#newsletter {
+        flex-direction: column;
+        width: 100%;
+    }
+    
+    section#newsletter div.flex-container {
+        flex-direction: column;
+        padding: 8%;
+    }
+    
+    // div.col-left {}
+    div.col-left h3, div.col-left p { 
+        text-align: center; 
+    }
+    
+    section#footer {
+        flex-direction: column;
+        width: 300px;
+        margin: 0 auto;
+    }
+    
+    // Inner pages -------------------------------------
+    
+    section#menu-options div.flex-container,
+    section#title {
+        flex-direction: column;
+    }
+    
+    section#options,
+    section#beer-options,
+    section#burger-options {
+        flex-direction: column;
+    }
+    
+    
+    section#options div.card img,
+    section#beer-options div.card img,
+    section#burger-options div.card img {
+        width: 100%;
+    }
+    
+    section#about {
+        width: 70%;
+    }
+    
+    section#about p {
+        column-count: 1;
+    }
+    
+    // booking form ---------------------------------------------------------
+    fieldset {
+        flex-direction: column;
+    }
+}

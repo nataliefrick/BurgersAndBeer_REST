@@ -8,7 +8,7 @@ $page_title = "Login";
 include("incl/header.php");
 
 // Check to see if user is logged in
-if (isset($_SESSION["admin"])) { // if yes - direct to admin.php dashboard
+if (isset($_SESSION["admin"])) { // if yes - direct to bookings.php dashboard
     header("Location: bookings.php");
 }
 
@@ -44,8 +44,7 @@ if (isset($_POST['username'])) {
         // If user is found in database
         if($httpcode === 200) {
             $_SESSION['admin'] = $username;
-
-            header("Location: admin.php");
+            header("Location: bookings.php");
         } else {
             $errormsg = "<p class='error'><strong>Felaktigt användarnamn eller lösenord!</strong></p>";
         }

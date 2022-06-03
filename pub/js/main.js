@@ -12,125 +12,6 @@ function init() {
     getBookings();
 }
 
-// Bookings ---------------------------
-function getBookings() {
-    fetch(urlBookings)
-    .then(response => {
-        if(response.status != 200) {
-            return
-        }
-        return response.json()
-        // .then(data => console.log(data))
-        .then(data => writeBookings(data))
-        .catch(err => console.log(err))
-    })
-}
-
-// write out bookings to webpage
-function writeBookings(bookings) {
-    // console.log(bookings);
-
-    // Separate out bookings for today
-    // var today = new Date();// Get today's date
-
-    const todayEl = document.getElementById("bookings-list-today");
-    // const laterEl = document.getElementById("bookings-list-later");
-    if (todayEl !== null) {
-        todayEl.innerHTML = "";
-        bookings.forEach(booking =>  {
-             todayEl.innerHTML +=
-            `<tr class="item"><td id="${booking.id}" class="centered">${booking.id}</td>
-            <td class="centered" id="date-${booking.id}">${booking.dateOfBooking}</td>
-            <td class="centered" id="time-${booking.id}">${booking.timeOfBooking}</td>
-            <td class="centered" id="nrP-${booking.id}">${booking.nrPeople}</td>
-            <td class="centered" id="name-${booking.id}">${booking.fullName}</td>
-            <td class="centered" id="tel-${booking.id}">${booking.telephone}</td>
-            <td class="centered" id="email-${booking.id}">${booking.email}</td>
-            <td class="centered">
-            <span id="deleteBtn" onClick="deleteBooking('${booking.id}')">Radera</span>
-            </td></tr>`
-        });
-    }
-
-}
-
-/* <span data-id=${booking.id} class="editBtn">Redigera</span>
-            </td>
-            <td class="centered">
-            <span data-id=${booking.id} class="deleteBtn">Radera</span>
-let updateBtn = document.getElementsByClassName("editBtn");
-let deleteBtn = document.getElementsByClassName("deleteBtn");
-
-for(let i = 0; i < deleteBtn.length; i++){
-    deleteBtn[i].addEventListener("click", deleteBooking);
-    updateBtn[i].addEventListener("click", updateBooking);
-} */
-
-// Add a menu item
-function updateBooking(event) {
-    event.preventDefault(); // prevents default to reload page
-    id = event.target.dataset.id
-    
-    // document.getElementById("date-" + id).value; 
-    // document.getElementById("time-" + id).value; 
-    // document.getElementById("nrP-" + id).value; 
-    // document.getElementById("name-" + id).value; 
-    // document.getElementById("tel-" + id).value; 
-    // document.getElementById("email-" + id).value;
-
-    
-    let newDate = document.getElementById("date-" + id).value;
-    let newTime = document.getElementById("time-" + id).value; 
-    let newNrP = document.getElementById("nrP-" + id).value; 
-    let newName = document.getElementById("name-" + id).value; 
-    let newTel = document.getElementById("tel-" + id).value; 
-    let newEmail = document.getElementById("email-" + id).value;
-
-
-    // console.log(newName + "<br>" + desc + "<br>" + dagens + "<br>" + category + "<br>" + img);
-
-    let jsonStr = JSON.stringify({
-        id : id,
-        dateOfBooking : newDate,
-        timeOfBooking : newTime,
-        nrPeople : newNrP,
-        fullName : newName,
-        telephone : newTel,
-        email: newEmail
-    });
-
-    // console.log(jsonStr);
-    // console.log(urlMenu);
-
-    fetch(urlMenu, {
-        method: "PUT",
-        headers: {
-            "content-type": "application/json"
-        },
-        body: jsonStr
-    })
-
-    .then(response => response.json())
-    // .then(response => console.log(response))
-    .then(event => getBookings())
-    .catch(err => console.log(err))
-}
-
-
-
-
-// Delete an item
-function deleteBooking(id) {
-    // let id = event.target.dataset.id;
-    // console.log("delete item" + id);
-    fetch(urlBookings + "?id=" + id, {
-        method: "DELETE"
-    })
-    .then(response => response.json())
-    .then(data => getBookings())
-    .catch(err => console.log(err))
-}
-
 // MENU ---------------------------
 function getMenu() {
     fetch(urlMenu)
@@ -389,6 +270,73 @@ function saveChanges() {
 
 
 
+
+
+/* Hamburger Menu -----------------------*/
+/* Open when someone clicks on the span element */
+function openNav() {
+    document.getElementById("myNav").style.width = "50%";
+}
+
+/* Close when someone clicks on the "x" symbol inside the overlay */
+function closeNav() {
+    document.getElementById("myNav").style.width = "0%";
+}
+// Bookings ---------------------------
+function getBookings() {
+    fetch(urlBookings)
+    .then(response => {
+        if(response.status != 200) {
+            console.log("status!200")
+            return
+        }
+        return response.json()
+        // .then(data => console.log(response))
+        .then(data => writeBookings(data))
+        .catch(err => console.log(err))
+    })
+}
+
+// write out bookings to webpage
+function writeBookings(bookings) {
+    console.log(bookings);
+
+    // Separate out bookings for today
+    var today = new Date();// Get today's date
+    console.log(today);
+
+    const todayEl = document.getElementById("bookings-list-today");
+    // const laterEl = document.getElementById("bookings-list-later");
+    if (todayEl !== null) {
+        todayEl.innerHTML = "";
+        bookings.forEach(booking =>  {
+             todayEl.innerHTML +=
+            `<tr class="item"><td id="${booking.id}" class="centered">${booking.id}</td>
+            <td class="centered" id="date-${booking.id}">${booking.dateOfBooking}</td>
+            <td class="centered" id="time-${booking.id}">${booking.timeOfBooking}</td>
+            <td class="centered" id="nrP-${booking.id}">${booking.nrPeople}</td>
+            <td class="centered" id="name-${booking.id}">${booking.fullName}</td>
+            <td class="centered" id="tel-${booking.id}">${booking.telephone}</td>
+            <td class="centered" id="email-${booking.id}">${booking.email}</td>
+            <td class="centered">
+            <span id="deleteBtn" onClick="deleteBooking('${booking.id}')">Radera</span>
+            </td></tr>`
+        });
+    }
+
+}
+
+// Delete an item
+function deleteBooking(id) {
+    // let id = event.target.dataset.id;
+    // console.log("delete item" + id);
+    fetch(urlBookings + "?id=" + id, {
+        method: "DELETE"
+    })
+    .then(response => response.json())
+    .then(data => getBookings())
+    .catch(err => console.log(err))
+}
 
 
 /* Hamburger Menu -----------------------*/

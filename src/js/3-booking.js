@@ -3,7 +3,7 @@ function getBookings() {
     fetch(urlBookings)
     .then(response => {
         if(response.status != 200) {
-            console.log("status!200")
+            // console.log("status!200")
             return
         }
         return response.json()
@@ -15,7 +15,7 @@ function getBookings() {
 
 // write out bookings to webpage
 function writeBookings(bookings) {
-    console.log(bookings);
+    // console.log(bookings);
 
     // Separate out bookings for today
     var today = new Date();// Get today's date

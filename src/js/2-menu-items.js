@@ -131,6 +131,7 @@ function sendToForm(data) {
     let categories = ["burgare", "beer", "sides", "läsk", "lättöl", "efterrätt"];
     let dagensDagar = ["måndag", "tisdag", "onsdag", "torsdag", "fredag", "lördag"];
     let categoryDD = "";
+
     categories.forEach(category =>  {
         if (category == data.category) {
             categoryDD +=
@@ -174,6 +175,10 @@ function sendToForm(data) {
         </select><br>
         </div><div>
         <label for="img">Bild Filnamn:</label><br>
+        <select id="img" name="img">
+            <?php echo $thelist; ?>
+        </select>
+        
         <input type="text" name="img" id="img" value="${data.img}"><br>
         </div><div class="dropdown">
         <label for="dagensLunch">Dagens Lunch:</label>
@@ -252,19 +257,4 @@ function saveChanges() {
     .catch(err => console.log(err))
 
 
-}
-
-
-
-
-
-/* Hamburger Menu -----------------------*/
-/* Open when someone clicks on the span element */
-function openNav() {
-    document.getElementById("myNav").style.width = "50%";
-}
-
-/* Close when someone clicks on the "x" symbol inside the overlay */
-function closeNav() {
-    document.getElementById("myNav").style.width = "0%";
 }

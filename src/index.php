@@ -70,7 +70,7 @@ if (isset($_POST['username'])) {
         <input class="btn" type="submit" value="Logga in">
     </form>
 
-
+</div>
 
 
 

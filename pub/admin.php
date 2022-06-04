@@ -10,7 +10,7 @@ include("incl/header.php");
 
 // populate dropdown with img files
 $thelist = '<option value=""></option>';
-if ($handle = opendir('img/')) {
+if ($handle = opendir('../webbplats/img/')) {
     while (false !== ($file = readdir($handle))) {
         if ($file != "." && $file != "..") {
             $thelist .= '<option value="'.$file.'">'.$file.'</option>';

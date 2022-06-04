@@ -48,6 +48,21 @@ function writeBookings(bookings) {
     if (todayEl !== null) {
         todayEl.innerHTML = "";
         if(todays_count>0){
+            todayEl.innerHTML += `
+            <thead>
+                <tr>
+                    <th class="centered">Id</th>
+                    <th class="centered">Datum</th>
+                    <th class="centered">Tid</th>
+                    <th class="centered desc">Antal P</th>
+                    <th class="centered">Namn</th>
+                    <th class="centered">Telefon</th>
+                    <th class="centered">Epost</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>`;           
+
             bookings.forEach(booking =>  { if(booking.dateOfBooking == idag){
                 todayEl.innerHTML +=
                 `<tr class="item"><td id="${booking.id}" class="centered">${booking.id}</td>
@@ -61,9 +76,11 @@ function writeBookings(bookings) {
                 <span id="deleteBtn" onClick="deleteBooking('${booking.id}')">Radera</span>
                 </td></tr>`
                 }
+
+                todayEl.innerHTML += `</tbody>`;
             })
         } else {
-            todayEl.innerHTML += `<tr class="item"><td class="centered" colspan="8">Inga bokningar för idag (${idag})</td></tr>`
+            todayEl.innerHTML += `<p>Inga bokningar för idag (${idag})</p>`
         }
     }
 
@@ -79,6 +96,21 @@ function writeBookings(bookings) {
     if (tomorrowEl !== null) {
         tomorrowEl.innerHTML = "";
         if(tomorrows_count>0){
+            tomorrowEl.innerHTML += `
+            <thead>
+                <tr>
+                    <th class="centered">Id</th>
+                    <th class="centered">Datum</th>
+                    <th class="centered">Tid</th>
+                    <th class="centered desc">Antal P</th>
+                    <th class="centered">Namn</th>
+                    <th class="centered">Telefon</th>
+                    <th class="centered">Epost</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>`; 
+
             bookings.forEach(booking =>  { if(booking.dateOfBooking == imorgon){
                 tomorrowEl.innerHTML +=
                 `<tr class="item"><td id="${booking.id}" class="centered">${booking.id}</td>
@@ -92,9 +124,10 @@ function writeBookings(bookings) {
                 <span id="deleteBtn" onClick="deleteBooking('${booking.id}')">Radera</span>
                 </td></tr>`
                 }
+                tomorrowEl.innerHTML += `</tbody>`;
             })
         } else {
-            tomorrowEl.innerHTML += `<tr class="item"><td class="centered" colspan="8">Inga bokningar än (${imorgon})</td></tr>`
+            tomorrowEl.innerHTML += `<p>Inga bokningar än (${imorgon})</p>`
         }
     }
 
@@ -110,6 +143,20 @@ function writeBookings(bookings) {
     if (thirdEl !== null) {
         thirdEl.innerHTML = "";
         if(third_count>0){
+            thirdEl.innerHTML += `
+            <thead>
+                <tr>
+                    <th class="centered">Id</th>
+                    <th class="centered">Datum</th>
+                    <th class="centered">Tid</th>
+                    <th class="centered desc">Antal P</th>
+                    <th class="centered">Namn</th>
+                    <th class="centered">Telefon</th>
+                    <th class="centered">Epost</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>`; 
             bookings.forEach(booking =>  { if(booking.dateOfBooking == iovermorgon){
                 thirdEl.innerHTML +=
                 `<tr class="item"><td id="${booking.id}" class="centered">${booking.id}</td>
@@ -123,9 +170,10 @@ function writeBookings(bookings) {
                 <span id="deleteBtn" onClick="deleteBooking('${booking.id}')">Radera</span>
                 </td></tr>`
                 }
+                thirdEl.innerHTML += `</tbody>`;
             })
         } else {
-            thirdEl.innerHTML += `<tr class="item"><td class="centered" colspan="8">Inga bokningar än (${iovermorgon}).</td></tr>`
+            thirdEl.innerHTML += `<p>Inga bokningar än (${iovermorgon}).</p>`
         }
     }
 
@@ -142,6 +190,20 @@ function writeBookings(bookings) {
     if (senareEl !== null) {
         senareEl.innerHTML = "";
         if(senare_count>0){
+            senareEl.innerHTML += `
+            <thead>
+                <tr>
+                    <th class="centered">Id</th>
+                    <th class="centered">Datum</th>
+                    <th class="centered">Tid</th>
+                    <th class="centered desc">Antal P</th>
+                    <th class="centered">Namn</th>
+                    <th class="centered">Telefon</th>
+                    <th class="centered">Epost</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>`; 
             bookings.forEach(booking =>  { if(booking.dateOfBooking > iovermorgon){
                 senareEl.innerHTML +=
                 `<tr class="item"><td id="${booking.id}" class="centered">${booking.id}</td>
@@ -155,9 +217,10 @@ function writeBookings(bookings) {
                 <span id="deleteBtn" onClick="deleteBooking('${booking.id}')">Radera</span>
                 </td></tr>`
                 }
+                senareEl.innerHTML += `</tbody>`;
             })
         } else {
-            senareEl.innerHTML += `<tr class="item"><td class="centered" colspan="8">Inga senare bokningar än</td></tr>`
+            senareEl.innerHTML += `<p class="centered"p>Inga senare bokningar än</p>`
         }
     }
 }

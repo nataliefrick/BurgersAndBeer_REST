@@ -12,7 +12,7 @@ $_SESSION['msg'] = "";
         }
   // } else {
       
-        $target_dir = "img/";
+        $target_dir = "../webbplats/img/";
         $target_file = basename($_FILES["fileToUpload"]["name"]);
         $target_file_thumbnail = "thumb_" . basename($_FILES["fileToUpload"]["name"]);
         
@@ -102,6 +102,7 @@ $_SESSION['msg'] = "";
               header("Location: admin.php"); 
             }
         }
+
     // }
 }
 ?>

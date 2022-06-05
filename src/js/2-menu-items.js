@@ -174,11 +174,7 @@ function sendToForm(data) {
             ${categoryDD}
         </select><br>
         </div><div>
-        <label for="img">Bild Filnamn:</label><br>
-        <select id="img" name="img">
-            <?php echo $thelist; ?>
-        </select>
-        
+        <label for="img">Bild Filnamn:</label><br>      
         <input type="text" name="img" id="img" value="${data.img}"><br>
         </div><div class="dropdown">
         <label for="dagensLunch">Dagens Lunch:</label>

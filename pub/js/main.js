@@ -303,6 +303,11 @@ function writeBookings(bookings) {
     imorgon= imorgon.getFullYear() + '-' + String(imorgon.getMonth() + 1).padStart(2, '0') + '-' + String(imorgon.getDate()).padStart(2, '0');
     iovermorgon= iovermorgon.getFullYear() + '-' + String(iovermorgon.getMonth() + 1).padStart(2, '0') + '-' + String(iovermorgon.getDate()).padStart(2, '0');
 
+    // const dd = String(today.getDate()).padStart(2, '0');
+    // const mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    // const yyyy = today.getFullYear();
+    // today = yyyy + '-' + mm + '-' + dd;
+
 // PRINT OUT todays bookings------------------------------
     // get nr bookings for today
     let todays_count = 0;

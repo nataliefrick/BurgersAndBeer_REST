@@ -65,6 +65,11 @@ div#instructions p {
 div#instructions p span.bold {
   font-weight: bold; }
 
+@media (max-width: 900px) {
+  table {
+    overflow-x: auto;
+    width: 90% !important; } }
+
 table {
   border: #ffffff50;
   display: block;

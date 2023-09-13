@@ -95,6 +95,13 @@ div#instructions p span.bold {
 }
 
 
+@media (max-width:900px) {
+    table {
+        overflow-x: auto;
+        width: 90%!important;
+    }
+    
+}
 
 table {
     border: $white-50;
